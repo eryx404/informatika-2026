@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ИНФОРМАТИКА 26 — QUIZIZZ ТРЕНАЖЕР (145 СҰРАҚ · 24 ТАҚЫРЫП)</title>
+  <style>
+    :root {
+      --bg: #080d17;
+      --surface: #111a2e;
+      --surface-2: #192642;
+      --border: #253659;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --primary: #38bdf8;
+      --accent: #a855f7;
+      --success: #10b981;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif; }
+    body { background: var(--bg); color: var(--text); min-height: 100vh; padding-bottom: 64px; overflow-x: hidden; }
+    .container { max-width: 980px; margin: 0 auto; padding: 16px; }
+
+    header {
+      background: rgba(17, 26, 46, 0.94); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); padding: 14px 20px;
+      display: flex; justify-content: space-between; align-items: center; gap: 12px;
+      position: sticky; top: 0; z-index: 100; box-shadow: 0 6px 24px rgba(0,0,0,0.45);
+    }
+    .logo-wrap { display: flex; align-items: center; gap: 12px; }
+    .logo-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: linear-gradient(135deg, #38bdf8, #a855f7);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 1.05rem; color: #fff; flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(56, 189, 248, 0.35);
+    }
+    .logo-title { font-size: 1.05rem; font-weight: 800; letter-spacing: -0.3px; }
+    .logo-sub { font-size: 0.74rem; color: var(--primary); font-weight: 700; margin-top: 2px; }
+    .header-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+    .btn {
+      padding: 8px 14px; border-radius: 10px; font-weight: 700; font-size: 0.84rem;
+      border: 1px solid transparent; cursor: pointer; transition: 0.18s ease;
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn-primary { background: linear-gradient(135deg, #38bdf8, #0ea5e9); color: #05101f; }
+    .btn-primary:hover { filter: brightness(1.08); }
+    .btn-purple { background: linear-gradient(135deg, #a855f7, #7c3aed); color: #fff; }
+    .btn-purple:hover { filter: brightness(1.08); }
+    .btn-emerald { background: linear-gradient(135deg, #10b981, #059669); color: #022c22; }
+    .btn-emerald:hover { filter: brightness(1.08); }
+    .btn-outline { background: var(--surface-2); border-color: var(--border); color: var(--text); }
+    .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+    .btn-warning { background: var(--warning); color: #080d17; }
+    .btn-danger { background: rgba(239, 68, 68, 0.16); border-color: rgba(239, 68, 68, 0.4); color: #fca5a5; }
+    .btn-danger:hover { background: var(--danger); color: #fff; }
+
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 18px 0; }
+    .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 15px 12px; text-align: center; }
+    .stat-num { font-size: 1.55rem; font-weight: 900; color: #fff; }
+    .stat-lbl { font-size: 0.72rem; color: var(--muted); font-weight: 700; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.4px; }
+
+    .mode-switch { display: flex; gap: 8px; background: var(--surface); padding: 6px; border-radius: 14px; border: 1px solid var(--border); margin-bottom: 18px; }
+    .mode-btn { flex: 1; padding: 11px 14px; border-radius: 10px; border: 1px solid transparent; background: transparent; color: var(--muted); font-weight: 800; font-size: 0.88rem; cursor: pointer; transition: 0.18s; }
+    .mode-btn.active { background: var(--surface-2); color: #fff; border-color: var(--primary); box-shadow: 0 2px 12px rgba(56, 189, 248, 0.18); }
+
+    .tabs { display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 4px; }
+    .tab-btn { padding: 10px 16px; border-radius: 11px; background: var(--surface); border: 1px solid var(--border); color: var(--muted); font-weight: 800; font-size: 0.85rem; cursor: pointer; white-space: nowrap; transition: 0.18s; }
+    .tab-btn.active { background: var(--primary); color: #04111f; border-color: var(--primary); }
+
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(285px, 1fr)); gap: 14px; }
+    .block-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 18px; display: flex; flex-direction: column; justify-content: space-between; transition: 0.2s; }
+    .block-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 10px 26px rgba(0,0,0,0.35); }
+    .b-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 8px; }
+    .b-badge { font-size: 0.7rem; font-weight: 800; padding: 4px 9px; border-radius: 7px; background: rgba(56,189,248,0.15); color: var(--primary); }
+    .b-count { font-size: 0.74rem; font-weight: 700; color: var(--muted); }
+    .b-title { font-size: 1.05rem; font-weight: 800; color: #fff; margin-bottom: 6px; }
+    .b-desc { font-size: 0.81rem; color: var(--muted); line-height: 1.45; margin-bottom: 14px; flex: 1; }
+    .b-actions { display: flex; gap: 8px; }
+    .b-actions .btn { flex: 1; padding: 9px 10px; font-size: 0.82rem; }
+    .special-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(265px, 1fr)); gap: 14px; margin-top: 16px; }
+
+    /* QUIZ VIEW */
+    #quizView { display: none; }
+    .quiz-bar { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 12px 16px; margin-bottom: 12px; }
+    .progress-track { width: 100%; height: 6px; background: var(--surface-2); border-radius: 99px; overflow: hidden; margin-bottom: 16px; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, #38bdf8, #a855f7); width: 0%; transition: width 0.3s ease; }
+    .streak-pill { background: rgba(245, 158, 11, 0.2); border: 1px solid var(--warning); color: #fde68a; padding: 4px 11px; border-radius: 20px; font-weight: 800; font-size: 0.8rem; }
+    .timer-pill { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-weight: 900; font-size: 1rem; color: var(--primary); background: rgba(56,189,248,0.12); padding: 4px 11px; border-radius: 8px; }
+    .timer-pill.danger { color: #fecaca; background: rgba(239,68,68,0.28); animation: pulse 0.8s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.55; } }
+
+    .q-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 24px; margin-bottom: 16px; box-shadow: 0 12px 30px rgba(0,0,0,0.3); }
+    .q-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; gap: 10px; flex-wrap: wrap; }
+    .q-tag { background: rgba(168,85,247,0.18); border: 1px solid rgba(168,85,247,0.45); color: #e9d5ff; padding: 4px 10px; border-radius: 8px; font-size: 0.76rem; font-weight: 800; }
+    .q-text { font-size: 1.13rem; font-weight: 700; line-height: 1.55; color: #fff; margin-bottom: 16px; white-space: pre-line; }
+
+    .visual-box {
+      background: #e2e8f0; border-radius: 12px; padding: 12px 16px; margin-bottom: 16px;
+      display: inline-flex; align-items: center; gap: 10px; border: 2px solid #94a3b8;
+    }
+
+    .opts-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+    .opts-grid.icon-opts { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .opt-btn {
+      background: var(--surface-2); border: 2px solid var(--border); border-radius: 13px;
+      padding: 13px 16px; text-align: left; color: var(--text); font-size: 0.96rem;
+      font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 13px;
+      transition: 0.15s; line-height: 1.4;
+    }
+    .opt-btn.icon-opt { padding: 12px 14px; justify-content: flex-start; }
+    .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: #223257; transform: translateY(-1px); }
+    .opt-btn:disabled { cursor: default; }
+    .opt-letter {
+      width: 32px; height: 32px; border-radius: 9px; background: var(--bg);
+      color: var(--primary); font-weight: 900; font-size: 0.88rem; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; border: 1px solid var(--border);
+    }
+    .ribbon-btn-wrap {
+      background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+      border: 1px solid #94a3b8; border-radius: 7px; padding: 6px 10px;
+      display: inline-flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    }
+    .opt-btn.correct { background: rgba(16, 185, 129, 0.22); border-color: var(--success); color: #fff; }
+    .opt-btn.correct .opt-letter { background: var(--success); color: #022c22; border-color: var(--success); }
+    .opt-btn.wrong { background: rgba(239, 68, 68, 0.22); border-color: var(--danger); color: #fff; }
+    .opt-btn.wrong .opt-letter { background: var(--danger); color: #fff; border-color: var(--danger); }
+
+    .feedback-bar { margin-top: 14px; padding: 13px 16px; border-radius: 12px; font-size: 0.88rem; line-height: 1.5; display: none; }
+    .feedback-bar.ok { background: rgba(16,185,129,0.14); border: 1px solid var(--success); color: #a7f3d0; }
+    .feedback-bar.bad { background: rgba(239,68,68,0.14); border: 1px solid var(--danger); color: #fecaca; }
+    .feedback-exp { margin-top: 6px; color: #e2e8f0; font-weight: 500; font-size: 0.84rem; }
+
+    .nav-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 14px; margin-bottom: 16px; display: none; }
+    .nav-dots { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; max-height: 150px; overflow-y: auto; }
+    .nav-dot { width: 32px; height: 32px; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--border); color: var(--muted); font-size: 0.76rem; font-weight: 800; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+    .nav-dot.cur { border-color: var(--primary); color: #fff; box-shadow: 0 0 0 2px rgba(56,189,248,0.3); }
+    .nav-dot.ok { background: #065f46; border-color: var(--success); color: #fff; }
+    .nav-dot.bad { background: #7f1d1d; border-color: var(--danger); color: #fff; }
+    .nav-dot.flg { box-shadow: inset 0 0 0 2px var(--warning); }
+
+    .quiz-footer { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+
+    #resultView { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 34px 24px; text-align: center; }
+    .res-score { font-size: 3.4rem; font-weight: 900; background: linear-gradient(135deg, #38bdf8, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 12px 0; }
+
+    .bank-controls { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+    .search-input { flex: 1; min-width: 220px; padding: 11px 15px; border-radius: 11px; background: var(--surface); border: 1px solid var(--border); color: #fff; font-size: 0.92rem; }
+    .search-input:focus { outline: none; border-color: var(--primary); }
+    .filter-select { padding: 11px 14px; border-radius: 11px; background: var(--surface); border: 1px solid var(--border); color: #fff; font-weight: 700; font-size: 0.85rem; }
+    .bank-item { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; margin-bottom: 12px; }
+    .bank-ans { display: inline-flex; align-items: center; gap: 8px; margin-top: 8px; padding: 6px 12px; border-radius: 8px; background: rgba(16, 185, 129, 0.16); border: 1px solid rgba(16, 185, 129, 0.55); color: #6ee7b7; font-weight: 800; font-size: 0.9rem; }
+    .bank-exp { margin-top: 6px; font-size: 0.81rem; color: var(--muted); }
+
+    #confettiCanvas { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
+
+    @media (max-width: 680px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .opts-grid.icon-opts { grid-template-columns: 1fr; }
+      header { flex-direction: column; align-items: stretch; }
+      .header-actions { justify-content: space-between; }
+    }
+  </style>
+</head>
+<body>
+<canvas id="confettiCanvas"></canvas>
+
+<header>
+  <div class="logo-wrap">
+    <div class="logo-icon">И26</div>
+    <div>
+      <div class="logo-title">ИНФОРМАТИКА 26 — QUIZIZZ ТРЕНАЖЕР</div>
+      <div class="logo-sub">24 ТАҚЫРЫП · 6 МОДУЛЬ · SVG WORD БАТЫРМАЛАРЫ · 145 СҰРАҚ</div>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-outline" id="soundBtn" onclick="toggleSound()">🔊 Дыбыс: Қосулы</button>
+    <button class="btn btn-danger" id="errQuickBtn" onclick="startErrors()" style="display:none;">🔄 Қателер (<span id="errQuickNum">0</span>)</button>
+    <button class="btn btn-primary" onclick="showDashboard()">🏠 Мәзір</button>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- DASHBOARD -->
+  <div id="dashboardView">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--primary)">145</div>
+        <div class="stat-lbl">Барлық сұрақ (24 тақырып)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="bestExamStat">0/40</div>
+        <div class="stat-lbl">Үздік емтихан (≥32)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--success)" id="masteredStat">0</div>
+        <div class="stat-lbl">Меңгерілген сұрақ</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--danger)" id="errorStat">0</div>
+        <div class="stat-lbl">Қателер банкі</div>
+      </div>
+    </div>
+
+    <div class="mode-switch">
+      <button class="mode-btn active" id="modeGameBtn" onclick="setMode('game')">🎮 Ойын режимі (40с · 🔥 Streak · Дыбыс)</button>
+      <button class="mode-btn" id="modeStudyBtn" onclick="setMode('study')">📚 Жаттау режимі (Таймерсіз · 💡 Түсіндірме + Карта)</button>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('modules', this)">📦 6 Модуль (145 сұрақ)</button>
+      <button class="tab-btn" onclick="switchTab('blocks', this)">🔢 30-30 Блоктар</button>
+      <button class="tab-btn" onclick="switchTab('exam', this)">🎓 Емтихан (40 сұрақ · 60 мин)</button>
+      <button class="tab-btn" onclick="switchTab('bank', this)">🔍 145 База & Шпаргалка</button>
+    </div>
+
+    <!-- TAB 1: MODULES -->
+    <div id="tab-modules">
+      <div class="cards-grid" id="modulesGrid"></div>
+      <div class="special-row">
+        <div class="block-card" style="border-color:rgba(168,85,247,0.55)">
+          <div class="b-top"><span class="b-badge" style="background:rgba(168,85,247,0.2);color:#e9d5ff">SVG БАТЫРМАЛАР</span><span class="b-count">17 сұрақ</span></div>
+          <div class="b-title">🖱️ MS Word батырмалары (Суретті сұрақтар)</div>
+          <div class="b-desc">Қаріп түсі, фломастер, кегль, туралау, интервал, тізім, қаламұш және заливка батырмалары.</div>
+          <div class="b-actions">
+            <button class="btn btn-purple" onclick="startIcons(false)">▶ Бастау</button>
+            <button class="btn btn-outline" onclick="startIcons(true)">🔀 Аралас</button>
+          </div>
+        </div>
+        <div class="block-card" style="border-color:rgba(16,185,129,0.55)">
+          <div class="b-top"><span class="b-badge" style="background:rgba(16,185,129,0.2);color:#6ee7b7">ТОЛЫҚ МАРАФОН</span><span class="b-count">145 сұрақ</span></div>
+          <div class="b-title">⚡ Барлық 145 сұрақ Марафон</div>
+          <div class="b-desc">«Инф 26.doc» құжатындағы барлық 24 тақырыпты басынан аяғына дейін толық өтіп шығыңыз.</div>
+          <div class="b-actions">
+            <button class="btn btn-emerald" onclick="startMarathon(false)">▶ Ретімен</button>
+            <button class="btn btn-outline" onclick="startMarathon(true)">🔀 Аралас</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: 30-30 BLOCKS -->
+    <div id="tab-blocks" style="display:none">
+      <div class="cards-grid" id="blocksGrid"></div>
+    </div>
+
+    <!-- TAB 3: EXAM -->
+    <div id="tab-exam" style="display:none">
+      <div class="block-card" style="max-width:560px;margin:14px auto;text-align:center;padding:30px">
+        <div style="font-size:2.8rem;margin-bottom:10px">🎓</div>
+        <div class="b-title" style="font-size:1.35rem;margin-bottom:10px">Емтихан Симуляторы (40 сұрақ)</div>
+        <div class="b-desc" style="font-size:0.92rem;margin-bottom:20px">
+          Барлық 145 сұрақтың ішінен кездейсоқ 40 сұрақ таңдалады. Уақыт: <b>60 минут</b>. Өту межесі: <b>32/40 (80%)</b>.
+        </div>
+        <button class="btn btn-primary" style="padding:13px 32px;font-size:1rem" onclick="startExam()">🚀 Емтиханды бастау</button>
+      </div>
+    </div>
+
+    <!-- TAB 4: BANK -->
+    <div id="tab-bank" style="display:none">
+      <div class="bank-controls">
+        <input type="text" class="search-input" id="bankSearch" placeholder="Сұрақ, ENIAC, WordArt, PowerPoint, F7, WinRAR немесе тақырып іздеу..." oninput="renderBank()">
+        <select class="filter-select" id="bankFilter" onchange="renderBank()">
+          <option value="all">Барлық 145 сұрақ</option>
+          <option value="m1">1-Модуль: Тарих & Сәулет (17)</option>
+          <option value="m2">2-Модуль: Алгоритм & Модельдеу (19)</option>
+          <option value="m3">3-Модуль: Word Мәтін & Бет (53)</option>
+          <option value="m4">4-Модуль: Word Кесте & Графика (24)</option>
+          <option value="m5">5-Модуль: PowerPoint (18)</option>
+          <option value="m6">6-Модуль: Желі, Вирус & Архив (14)</option>
+          <option value="icons">Тек SVG батырмалар (17)</option>
+        </select>
+      </div>
+      <div id="bankCountLabel" style="font-size:0.82rem;color:var(--muted);margin-bottom:10px;font-weight:700"></div>
+      <div id="bankList"></div>
+    </div>
+  </div>
+
+  <!-- QUIZ VIEW -->
+  <div id="quizView">
+    <div class="quiz-bar">
+      <div style="font-weight:800;font-size:0.92rem" id="quizHeaderTitle">Модуль · 1 / 30</div>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+        <span class="streak-pill" id="streakPill">🔥 0</span>
+        <span class="timer-pill" id="timerPill">⏱ 40с</span>
+        <button class="btn btn-outline" style="padding:5px 10px;font-size:0.78rem" onclick="finishOrQuit()">✕ Аяқтау</button>
+      </div>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+    <div class="q-card">
+      <div class="q-meta">
+        <span class="q-tag" id="qTag">№1</span>
+        <button class="btn btn-outline" style="padding:4px 10px;font-size:0.78rem" id="flagBtn" onclick="toggleFlag()">🚩 Белгілеу</button>
+      </div>
+      <div class="q-text" id="qText"></div>
+      <div id="qVisualSlot"></div>
+      <div class="opts-grid" id="optsGrid"></div>
+      <div class="feedback-bar" id="feedbackBar"></div>
+    </div>
+
+    <div class="nav-panel" id="navPanel">
+      <div style="font-size:0.78rem;color:var(--muted);font-weight:800">Сұрақтар картасы:</div>
+      <div class="nav-dots" id="navDots"></div>
+    </div>
+
+    <div class="quiz-footer">
+      <button class="btn btn-outline" id="prevBtn" onclick="prevQ()">← Алдыңғы</button>
+      <div style="font-size:0.84rem;color:var(--muted);font-weight:700" id="liveScoreTxt">Дұрыс: 0</div>
+      <button class="btn btn-primary" id="nextBtn" onclick="nextQ()">Келесі →</button>
+    </div>
+  </div>
+
+  <!-- RESULT VIEW -->
+  <div id="resultView">
+    <div style="font-size:3.2rem" id="resEmoji">🏆</div>
+    <h2 style="margin-top:8px;font-size:1.5rem" id="resTitle">Тест аяқталды!</h2>
+    <div class="res-score" id="resScore">36 / 40</div>
+    <p style="color:var(--muted);max-width:500px;margin:0 auto 22px;line-height:1.5" id="resDesc"></p>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn btn-primary" onclick="showDashboard()">🏠 Басты мәзірге</button>
+      <button class="btn btn-warning" id="resRetryWrong" style="display:none" onclick="retrySessionWrong()">🔄 Қателерді қайталау</button>
+      <button class="btn btn-outline" onclick="restartCurrent()">↻ Қайта бастау</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const MODULES = [{"id": "m1", "badge": "1-МОДУЛЬ", "icon": "🖥️", "title": "Компьютер тарихы & ДК сәулеті", "desc": "ЭЕМ буындары (ENIAC, Бэббидж, Лавлейс), шиналар, солтүстік/оңтүстік көпір, RAM."}, {"id": "m2", "badge": "2-МОДУЛЬ", "icon": "🔀", "title": "Алгоритмдер & Модельдеу", "desc": "Алгоритм орындаушылары, блок-сызба фигуралары, сызықтық/тармақталған/циклдік, модельдер."}, {"id": "m3", "badge": "3-МОДУЛЬ", "icon": "📝", "title": "MS Word: Мәтін, Абзац, Тізім & Баспа", "desc": "Интерфейс, қаріп/кегль, SVG батырмалар, абзацтар, тізімдер, бағандар, бет параметрлері."}, {"id": "m4", "badge": "4-МОДУЛЬ", "icon": "📊", "title": "MS Word: Кестелер & Графика", "desc": "Кесте құру/түзету/пішімдеу, қаламұш батырмалары, WordArt, фигуралар мен топтастыру."}, {"id": "m5", "badge": "5-МОДУЛЬ", "icon": "📽️", "title": "MS PowerPoint: Тұсаукесерлер", "desc": "Слайд режимдері, титул макеті, жасырын слайд, дизайн, түстер сызбасы, дыбыс қосу."}, {"id": "m6", "badge": "6-МОДУЛЬ", "icon": "🛡️", "title": "Желілер, Вирустар & Мұрағаттау", "desc": "Модем, браузерлер, F5, компьютерлік вирустар, антивирус және WinRAR мұрағаттау."}];
+const DB = [{"id": 1, "mod": "m1", "sec": "Есептеу техникасының даму тарихы. Компьютердің буыны", "q": "Қайсысы алғашқы есептеу құрылғысы емес?", "opts": ["Шоттар", "Арифмометр", "Калькулятор", "Соробан"], "ans": 2, "exp": "Шоттар, соробан және арифмометр — ерте кезеңдегі механикалық есептеу құралдары; калькулятор XX ғасырдың электрондық құрылғысы."}, {"id": 2, "mod": "m1", "sec": "Есептеу техникасының даму тарихы. Компьютердің буыны", "q": "Программа бойынша жұмыс істеген бірінші құрылғы:", "opts": ["Арифмометр", "Холлерит машинасы", "Шоттар", "Беббидж машинасы"], "ans": 3, "exp": "Чарльз Бэббидждің Аналитикалық машинасы бағдарламамен (перфокарталармен) басқарылатын алғашқы жоба болды."}, {"id": 3, "mod": "m1", "sec": "Есептеу техникасының даму тарихы. Компьютердің буыны", "q": "Бірінші программалаушы кім?", "opts": ["Чарльз Беббидж", "Герман Холлерит", "Ада Августа Лавлейс", "Блез Паскаль"], "ans": 2, "exp": "Ада Августа Лавлейс Бэббидж машинасына арнап әлемдегі алғашқы алгоритм-программаны жазған."}, {"id": 4, "mod": "m1", "sec": "Есептеу техникасының даму тарихы. Компьютердің буыны", "q": "«ЭЕМ буыны» терминін қалай түсінеміз?", "opts": ["Тек бір ғана ғылыми және техникалық принциптерге негізделіп жасалған ЭЕМ-нің барлық түрлері мен модельдері", "Барлық есептеу машиналары", "Ақпаратты өңдеуге, сақтауға және тасымалдауға арналған машиналар жиыны", "Процессордың Pentium моделінің барлық түрлері"], "ans": 0, "exp": "ЭЕМ буындары ортақ элементтік база мен ғылыми-техникалық принциптеріне қарай бөлінеді."}, {"id": 5, "mod": "m1", "sec": "Есептеу техникасының даму тарихы. Компьютердің буыны", "q": "Бірінші электрондық компьютер болған есептеуіш машина қалай аталады?", "opts": ["ABC", "ДВК", "БЭСМ-2", "ENIAC"], "ans": 3, "exp": "ENIAC — 1946 жылы АҚШ-та құрастырылған бірінші әмбебап электрондық компьютер."}, {"id": 6, "mod": "m1", "sec": "Есептеу техникасының даму тарихы. Компьютердің буыны", "q": "Алғашқы ЭЕМ қай жылы пайда болды?", "opts": ["1946 ж.", "1949 ж.", "1980 ж.", "1956 ж."], "ans": 0, "exp": "Алғашқы электрондық-цифрлық есептеуіш машина ENIAC 1946 жылы таныстырылды."}, {"id": 7, "mod": "m1", "sec": "Есептеу техникасының даму тарихы. Компьютердің буыны", "q": "Қазіргі кезде компьютердің неше буыны бар?", "opts": ["3", "4", "5", "Анықталмаған"], "ans": 1, "exp": "Құжат кілті бойынша: B) 4 (мектеп оқулығында жаппай өндіріске енген 4 буын негізге алынған; 5-буын ЖИ бағытында дамуда)."}, {"id": 8, "mod": "m1", "sec": "Есептеу техникасының даму тарихы. Компьютердің буыны", "q": "Бірінші буын компьютерлерінің элементтік базасы – ол:", "opts": ["Транзистор", "Интегралдық сызба", "Электрондық лампа", "Үлкен интегралдық сызба"], "ans": 2, "exp": "I буын (1946–1954) компьютерлері электрондық вакуумдық лампалар негізінде жұмыс істеді."}, {"id": 9, "mod": "m1", "sec": "Есептеу техникасының даму тарихы. Компьютердің буыны", "q": "Екінші буын компьютерлерінің элементтік базасы:", "opts": ["Транзистор", "Интегралдық сызба", "Электрондық лампа", "Үлкен интегралдық сызба"], "ans": 0, "exp": "II буын (1955–1964) компьютерлері жартылай өткізгішті транзисторларға көшті."}, {"id": 10, "mod": "m1", "sec": "Есептеу техникасының даму тарихы. Компьютердің буыны", "q": "Қай буынның компьютерлері дербес компьютерлер деп аталады?", "opts": ["Екінші", "Үшінші", "Төртінші", "Бесінші"], "ans": 2, "exp": "IV буында үлкен интегралдық схемалар (микропроцессорлар) шығып, дербес компьютерлер (ДК) пайда болды."}, {"id": 11, "mod": "m1", "sec": "ДК сәулетінің заманауи даму бағыттары", "q": "Құрылғылар арасында деректер алмасу үшін жауапты шинаны атаңдар:", "opts": ["Деректер шинасы", "Адрестік шина", "Басқару шинасы", "Бұйрық шинасы"], "ans": 0, "exp": "Деректер шинасы (Data Bus) процессор, жад және сыртқы құрылғылар арасында ақпарат тасымалдайды."}, {"id": 12, "mod": "m1", "sec": "ДК сәулетінің заманауи даму бағыттары", "q": "Жедел жады және видео жады бақылаушыларынан тұратын көпір қалай аталады?", "opts": ["Оңтүстік көпір", "Жүйелік көпір", "Солтүстік көпір", "Бұйрықтық көпір"], "ans": 2, "exp": "Солтүстік көпір (Northbridge) процессорды RAM және бейнекартамен жоғары жылдамдықта байланыстырады."}, {"id": 13, "mod": "m1", "sec": "ДК сәулетінің заманауи даму бағыттары", "q": "USB шинасын қандай дискілерді қосу үшін қолданады?", "opts": ["Оптикалық дискілерді", "Флэш-дискілерді", "Жұмсақ магниттік дискілерді", "DVD дискілерді"], "ans": 1, "exp": "USB порты арқылы флэш-жинақтағыштар мен заманауи перифериялық құрылғылар қосылады."}, {"id": 14, "mod": "m1", "sec": "ДК сәулетінің заманауи даму бағыттары", "q": "ДК сәулеті деген не?", "opts": ["ДК ішкі ұйымдастырылуы", "Ақпаратты түрлендірудің техникалық құралдары", "Ақпаратты түрлендіру үшін қажетті техникалық құралдар", "Тұрмыстық техниканы басқару жүйелері"], "ans": 0, "exp": "Компьютер сәулеті — оның ішкі құрылымы, түйіндерінің өзара байланысы мен жұмыс істеу принциптері."}, {"id": 15, "mod": "m1", "sec": "ДК сәулетінің заманауи даму бағыттары", "q": "Жедел жады не үшін керек?", "opts": ["Модеммен компьютерді жалғау үшін", "Ақпаратты өңдеу үшін", "Программаларды іске қосу үшін", "Ақпаратты уақытша сақтау үшін"], "ans": 3, "exp": "Жедел жады (RAM) компьютер жұмыс істеп тұрған кезде деректер мен программаларды уақытша сақтайды."}, {"id": 16, "mod": "m1", "sec": "ДК сәулетінің заманауи даму бағыттары", "q": "Шинаның негізгі сипаттамасы:", "opts": ["Разрядтылығы", "Тактілік жиілігі", "Сыйымдылығы", "Ұзындығы"], "ans": 0, "exp": "Шина разрядтылығы бір мезетте параллель тасымалданатын биттер санын анықтайды."}, {"id": 17, "mod": "m1", "sec": "ДК сәулетінің заманауи даму бағыттары", "q": "Шет орналасқан құрылғылар бақылаушысынан тұратын көпір қалай аталады?", "opts": ["Солтүстік көпір", "Оңтүстік көпір", "Жүйелік көпір", "Бұйрықтық көпір"], "ans": 1, "exp": "Оңтүстік көпір (Southbridge) USB, SATA, дыбыс, желі және енгізу-шығару құрылғыларын басқарады."}, {"id": 18, "mod": "m2", "sec": "Алгоритмдер және оны орындаушылар", "q": "Алгоритм дегеніміз – ...", "opts": ["Іс-әрекет", "Толық сипатталған тапсырма", "Берілген есепті шешудегі жасалатын әрекеттердің дәл және қарапайым етіп жазылуы", "Математикалық есептің шешілуі"], "ans": 2, "exp": "Алгоритм — қойылған мақсатқа жету үшін орындалатын нақты, түсінікті әрекеттер тізбегі."}, {"id": 19, "mod": "m2", "sec": "Алгоритмдер және оны орындаушылар", "q": "Төмендегі құжаттың қайсысы алгоритм?", "opts": ["Техникалық қауіпсіздік ережесі", "Аспаздық рецепт", "Сабақ кестесі", "Сынып тізімі"], "ans": 1, "exp": "Аспаздық рецепт тағам дайындаудың реттелген нақты қадамдарын сипаттайды."}, {"id": 20, "mod": "m2", "sec": "Алгоритмдер және оны орындаушылар", "q": "Алгоритм орындаушыларына жатпайтынын көрсетіңдер:", "opts": ["Жазу үстелі", "Адам", "Ыдыс жуатын машина", "Робот"], "ans": 0, "exp": "Жазу үстелі — бұйрықтарды орындай алмайтын қарапайым зат."}, {"id": 21, "mod": "m2", "sec": "Алгоритмдер және оны орындаушылар", "q": "Кез келген алгоритмнің соңғы бұйрығын көрсетіңдер:", "opts": ["Бітіру", "Алгоритмдегі іс-әрекетті аяқтайтын кез келген бұйрық", "Орындау", "Соңы"], "ans": 3, "exp": "Алгоритм әрқашан «Басы» бұйрығымен басталып, «Соңы» бұйрығымен аяқталады."}, {"id": 22, "mod": "m2", "sec": "Алгоритмнің жазылу формалары", "q": "Ұсынылғандардың ішінен алгоритм формаларына жатпайтынын көрсетіңдер:", "opts": ["Сөздік", "Графикалық", "Алгоритмдік тілде", "Ағылшын тілінде"], "ans": 3, "exp": "Алгоритм жазылу формалары: сөздік, графикалық (блок-сызба), алгоритмдік тіл және программалау тілі."}, {"id": 23, "mod": "m2", "sec": "Алгоритмнің жазылу формалары", "q": "Блок-сызба алгоритміндегі іс-әрекет (процесс) дегеніміз:", "opts": ["Эллипс (сопақша шеңбер)", "Тіктөртбұрыш", "Ромб", "Алтыбұрыш"], "ans": 1, "exp": "Есептеу немесе меншіктеу әрекеттері блок-сызбада тіктөртбұрышпен бейнеленеді."}, {"id": 24, "mod": "m2", "sec": "Алгоритмнің жазылу формалары", "q": "Блок-сызба алгоритміндегі енгізу-шығару мәліметтері қандай фигурамен беріледі?", "opts": ["Эллипс (сопақша шеңбер)", "Тіктөртбұрыш", "Ромб", "Параллелограмм"], "ans": 3, "exp": "Деректерді енгізу және нәтижені шығару блогы — параллелограмм."}, {"id": 25, "mod": "m2", "sec": "Алгоритмнің жазылу формалары", "q": "Блок-сызбада алгоритмнің басы мен соңы қандай фигурамен беріледі?", "opts": ["Эллипс (сопақша шеңбер)", "Тіктөртбұрыш", "Ромб", "Параллелограмм"], "ans": 0, "exp": "Алгоритмнің басталуы мен аяқталуы эллипс (сопақша) фигурасымен салынады."}, {"id": 26, "mod": "m2", "sec": "Алгоритм түрлері", "q": "Егер алгоритмдегі іс-әрекет бірінен кейін бірі қатаң түрде орындалса ... алгоритм деп аталады.", "opts": ["Сызықтық", "Тармақталған", "Толық емес формадағы тармақталған алгоритм", "Тармақталған элементтері бар сызықтық алгоритм"], "ans": 0, "exp": "Сызықтық алгоритмде командалар жазылу ретімен бірінен соң бірі орындалады."}, {"id": 27, "mod": "m2", "sec": "Алгоритм түрлері", "q": "Толық және толық емес формадағы алгоритмді не деп атаймыз?", "opts": ["Сызықтық", "Тармақталған", "Ондай алгоритм жоқ", "Таңдау алгоритмі"], "ans": 1, "exp": "Тармақталған алгоритмнің толық (if–else) және толық емес (if) түрлері болады."}, {"id": 28, "mod": "m2", "sec": "Алгоритм түрлері", "q": "Тармақталу алгоритмінің блок-сызбасындағы шарттың берілуі қандай фигурамен сипатталады:", "opts": ["Тіктөртбұрыш", "Эллипс (сопақша шеңбер)", "Алтыбұрыш", "Ромб"], "ans": 3, "exp": "Шартты тексеру («Иә» / «Жоқ») ромб фигурасымен көрсетіледі."}, {"id": 29, "mod": "m2", "sec": "Алгоритм түрлері", "q": "«Егер сағат кешкі 11 болса, онда ұйықтау керек, әйтпесе кітап оқу керек». Қандай алгоритм?", "opts": ["Сызықтық", "Тармақталу алгоритмінің толық формасы", "Тармақталу алгоритмінің толық емес формасы", "Аралас түр"], "ans": 1, "exp": "«Егер ... онда ... әйтпесе ...» құрылымы — тармақталу алгоритмінің толық формасы."}, {"id": 30, "mod": "m2", "sec": "Циклдік алгоритмдер", "q": "Қайсысы алгоритм түріне жатпайды?", "opts": ["Сызықтық", "Бұйрықтық", "Тармақталу", "Циклдік"], "ans": 1, "exp": "Алгоритмнің негізгі 3 түрі бар: сызықтық, тармақталу және циклдік."}, {"id": 31, "mod": "m2", "sec": "Циклдік алгоритмдер", "q": "Циклдік алгоритм дегеніміз:", "opts": ["Алгоритмнің бірнеше рет қайталануы", "Іс-әрекеттің орындалуы қойылған шартқа тәуелді алгоритм", "Егер алгоритм тізбектеле орындалса", "Алгоритмнің графикалық түсіндірілуі"], "ans": 0, "exp": "Циклдік алгоритмде белгілі бір әрекеттер тізбегі бірнеше рет қайталанып орындалады."}, {"id": 32, "mod": "m2", "sec": "Циклдік алгоритмдер", "q": "Блок-сызбада циклдік алгоритмнің шарты (параметрлі цикл тақырыбы) ... жазылады.", "opts": ["Тіктөртбұрышта", "Ромбта", "Параллелограмда", "Алтыбұрышта"], "ans": 3, "exp": "Параметрлі цикл (for) блогы блок-сызбада алтыбұрышпен (модификация блогы) бейнеленеді."}, {"id": 33, "mod": "m2", "sec": "Модельдің түрлері", "q": "Модельді тек ... құруға болады.", "opts": ["Нақты бар нысанға", "Ойластырып алған нысанға", "Кез келген нысанға, үдеріске, құбылысқа", "Табиғи құбылыстарға"], "ans": 2, "exp": "Модель нақты да, ойдан шығарылған да кез келген нысанға, үдеріске немесе құбылысқа құрыла алады."}, {"id": 34, "mod": "m2", "sec": "Модельдің түрлері", "q": "Модельдеудің негізгі кезеңдері – ол:", "opts": ["Модельді құру, компьютерлік тәжірибе", "Есептің қойылуы, модель құру, компьютерлік тәжірибе, модельдеу нәтижесін талдау", "Есептің қойылуы, модельді құру", "Модельді құру, модельдеу нәтижесін талдау"], "ans": 1, "exp": "Компьютерлік модельдеу 4 негізгі кезеңнен тұрады: есепті қою → модель құру → компьютерлік тәжірибе → нәтижені талдау."}, {"id": 35, "mod": "m2", "sec": "Модельдің түрлері", "q": "Ақпараттық модель:", "opts": ["Компьютердің көмегімен жүзеге асады", "Нысанның, үдерістің, құбылыстың сипаттамасын береді", "Нысанның қасиеттерін сипаттайтын математикалық формулалар", "Тек статикалық модель болуы мүмкін"], "ans": 1, "exp": "Ақпараттық модель нысанның маңызды қасиеттері мен байланыстарын ақпарат түрінде сипаттайды."}, {"id": 36, "mod": "m2", "sec": "Модельдің түрлері", "q": "Уақыт факторларына байланысты модельді келесідей деп айтуға болады:", "opts": ["Компьютерлік және компьютерлік емес", "Статикалық және динамикалық", "Тәжірибелік және имитациялық", "Сөздік модельдеу"], "ans": 1, "exp": "Уақытқа тәуелсіз модель — статикалық, ал уақыт бойынша өзгеретін модель — динамикалық."}, {"id": 37, "mod": "m3", "sec": "Мәтіндік процессор. Программаның интерфейсі", "q": "Артығын таңдаңдар:", "opts": ["WordPad", "Microsoft Word", "Paint", "Блокнот"], "ans": 2, "exp": "WordPad, MS Word және Блокнот — мәтіндік редакторлар, ал Paint — растрлық графикалық редактор."}, {"id": 38, "mod": "m3", "sec": "Мәтіндік процессор. Программаның интерфейсі", "q": "Ашық құжаттағы беттердің санын қалай анықтауға болады?", "opts": ["жолақтың Бетті белгілеу (Разметка страницы) тіркеме парағында", "жолақтың Басты (Главная) тіркеме парағында", "терезенің тақырып жолында", "қалып-күй жолында"], "ans": 3, "exp": "Терезенің төменгі жағындағы қалып-күй жолында (строка состояния) «Бет: 1 / 27» түрінде көрсетіледі."}, {"id": 39, "mod": "m3", "sec": "Мәтіндік процессор. Программаның интерфейсі", "q": "Құжатты қарап шығу масштабын өзгертуге болады:", "opts": ["жолақтың Бетті белгілеу бөлімінде", "жолақтың Басты бөлімінде", "терезенің тақырып жолында", "қалып-күй жолында"], "ans": 1, "exp": "Құжат кілтінде B) белгіленген. (Ескерту: MS Word тәжірибесінде масштаб төменгі қалып-күй жолында және «Түр → Масштаб» бөлімінде өзгертіледі.)"}, {"id": 40, "mod": "m3", "sec": "Мәтіндік процессор. Программаның интерфейсі", "q": "Жанама (контекстік) мәзірді қалай шақырамыз?", "opts": ["құжаттың қажетті элементін тінтуірдің оң батырмасын шерту арқылы", "құжаттың қажетті элементін тінтуірдің сол жақ батырмасын шерту арқылы", "құжаттың қажетті элементін тінтуірдің оң батырмасын екі рет шерту арқылы", "құжаттың қажетті элементін тінтуірдің сол жақ батырмасын екі рет шерту арқылы"], "ans": 0, "exp": "Жанама мәзір әрқашан нысанның үстінен тінтуірдің оң батырмасын бір рет шертумен ашылады."}, {"id": 41, "mod": "m3", "sec": "Мәтіндік процессор. Программаның интерфейсі", "q": "Құжатты сақтау бұйрығы қайда орналасқан?", "opts": ["жолақтың Басты тіркеме парағында", "Файл мәзірінде", "Office батырмасының мәзірінде", "тек пернетақтадан қолжетімді"], "ans": 0, "exp": "Құжат кілтінде A) белгіленген. (Ескерту: нақты MS Word-та «Файл» немесе «Office» батырмасының мәзірінде және Ctrl+S арқылы орындалады.)"}, {"id": 42, "mod": "m3", "sec": "Мәтіндік процессор. Программаның интерфейсі", "q": "Түр → Басқа терезеге ауысу бұйрығы не үшін керек?", "opts": ["жаңа терезе ашу үшін", "жаңа құжат құру үшін", "бұрын құрылған құжатты ашу үшін", "ашық құжаттар бойынша жылжу үшін"], "ans": 3, "exp": "«Басқа терезеге ауысу» бір мезгілде ашық тұрған Word құжаттары арасында жылдам ауысуға мүмкіндік береді."}, {"id": 43, "mod": "m3", "sec": "Мәтінді пішімдеудің негізгі тәсілдері", "q": "Кегль – ол:", "opts": ["қаріптің сырт пішімі", "қаріптің мөлшері", "абзацтың элементі", "пішімдеу сызғышындағы маркер"], "ans": 1, "exp": "Кегль — қаріптің пунктпен (pt) өлшенетін биіктігі/мөлшері (мысалы, 14 pt)."}, {"id": 44, "mod": "m3", "sec": "Мәтінді пішімдеудің негізгі тәсілдері", "q": "Символдар тізімдемесін, оның ішінде пернетақтада жоқтарын да, экранда көрсетуді қалай жүзеге асыруға болады?", "opts": ["Кірістіру → Символ бұйрығы", "Тіркеме парақ жолағының Басты бөлімі", "Абзац сұхбаттық терезесі", "Қаріп сұхбаттық терезесі"], "ans": 0, "exp": "Пернетақтада жоқ арнайы символдар «Кірістіру → Символ» командасы арқылы қойылады."}, {"id": 45, "mod": "m3", "sec": "Мәтінді пішімдеудің негізгі тәсілдері", "q": "Мәтінді экранға қарамай теріп, біраз уақыттан кейін CapsLock пернесі басулы тұрғанын көрдіңдер. Ары қарай қандай әрекет жасайсыңдар?", "opts": ["мәтінді қайта тереміз", "емле қателерін тексеруді қолданамыз", "Регистр батырмасының көмегімен бас және жай әріптердің кезектесіп орналасу ретін «Сөйлемдегідей» тәртібіне өзгертеміз", "Басты → Қаріп сұхбаттық терезесінде Регистр ажыратып-қосқышын жалғаймыз"], "ans": 2, "exp": "«Басты → Қаріп → Регистр (Aa)» батырмасы мәтінді қайта термей-ақ «Сөйлемдегідей» түрге ауыстырады."}, {"id": 46, "mod": "m3", "sec": "Мәтінді пішімдеудің негізгі тәсілдері", "q": "Сиректетіп теру (разреженный интервал) үшін не істеу керек?", "opts": ["Абзац сұхбаттық терезесін шақырып, Қосымша тіркеме парағынан «сиректетілген» параметрін таңдаймыз", "жолақтың Басты → Қаріп тіркеме парағында тиісті батырманы қосамыз", "символдарды арасына бос орын қосып тереміз", "Қаріп сұхбаттық терезесін шақырып, Қосымша тіркеме парағына ауысамыз және «Интервал» тізімінен «сиректетілген» параметрін таңдаймыз"], "ans": 3, "exp": "Әріпаралық интервал «Қаріп (Шрифт) → Қосымша (Дополнительно) → Интервал → Сиректетілген» арқылы бапталады."}, {"id": 47, "mod": "m3", "sec": "Мәтінді пішімдеудің негізгі тәсілдері", "q": "«x²» мәтінін теру үшін қандай батырманы басу керек?", "opts": ["жоласты белгісін (x₂)", "жолүсті белгісін (x²)", "форматты тазалау", "Кірістіру → Символ → Басқа символдар бұйрығын"], "ans": 1, "exp": "Дәреже көрсеткішін (x²) жазу үшін жолүсті белгісі (Надстрочный знак) қолданылады."}, {"id": 48, "mod": "m3", "sec": "Мәтінді пішімдеудің негізгі тәсілдері", "q": "Мәтіннің түсін өзгерту батырмасы – ол:", "opts": ["bucket", "sort_az", "highlight", "font_color"], "ans": 3, "exp": "Астында қызыл жолағы бар «A» батырмасы — мәтін (қаріп) түсін өзгерту батырмасы.", "optType": "icon"}, {"id": 49, "mod": "m3", "sec": "Мәтінді пішімдеудің негізгі тәсілдері", "q": "Мәтіннің түсін фломастермен боялғандай етіп өзгерту батырмасы – ол:", "opts": ["bucket", "sort_az", "highlight", "font_color"], "ans": 2, "exp": "Қалам мен сары жолағы бар «ab» батырмасы — мәтінді фломастермен ерекшелеу (Цвет выделения текста).", "optType": "icon"}, {"id": 50, "mod": "m3", "sec": "Мәтінді пішімдеудің негізгі тәсілдері", "q": "Қаріптің барлық баптауларын алып тастау үшін қолданылатын батырма:", "opts": ["clear_fmt", "sort_az", "strike", "font_size_ud"], "ans": 0, "exp": "Өшіргіші бар «Aa» батырмасы — пішімдеуді толық тазалау (Очистить формат).", "optType": "icon"}, {"id": 51, "mod": "m3", "sec": "Мәтінді пішімдеудің негізгі тәсілдері", "q": "Қаріптің мөлшерін үлкейту немесе кішірейту үшін қолдануға болатын батырма:", "opts": ["sort_az", "font_size_ud", "strike", "font_family"], "ans": 1, "exp": "«A▲ A▼» батырмалары қаріп мөлшерін бір сатыға үлкейтеді немесе кішірейтеді.", "optType": "icon"}, {"id": 52, "mod": "m3", "sec": "Мәтінді пішімдеудің негізгі тәсілдері", "q": "Қаріптің кеглін (мөлшерін санмен) өзгерту батырмасы:", "opts": ["strike", "font_family", "highlight", "font_size_num"], "ans": 3, "exp": "«12 ▼» ашылмалы тізімі — қаріптің кеглін (өлшемін) таңдау өрісі.", "optType": "icon"}, {"id": 53, "mod": "m3", "sec": "Абзацтар, шегіністер және интервалдар", "q": "Жоларалық интервалды өзгертуге болатын бұйрық қандай?", "opts": ["Жанама мәзір → Абзац", "Жанама мәзір → Қаріп", "Жанама мәзір → Интервал", "Жанама мәзір → Қаріп → Абзац"], "ans": 0, "exp": "Жоларалық интервал «Абзац» сұхбаттық терезесінде бапталады."}, {"id": 54, "mod": "m3", "sec": "Абзацтар, шегіністер және интервалдар", "q": "Экранда пішімдеу сызғышы жоқ. Оны қалай қосамыз?", "opts": ["Түр → Пішімдеу сызғышы → Көрсету", "Түр → Көрсету немесе жасыру → Сызғыш", "Басты → Көрсету немесе жасыру → Сызғыш", "Оны қосуға болмайды"], "ans": 1, "exp": "Сызғышты (Линейка) «Түр (Вид) → Көрсету → Сызғыш» белгішесін қосу арқылы шығарамыз."}, {"id": 55, "mod": "m3", "sec": "Абзацтар, шегіністер және интервалдар", "q": "Пішімдеу сызғышының қызметі:", "opts": ["абзацтың параметрлерін (сол жақ және оң жақ шеттер шегіністерін, азат жолды) баптау", "қаріптің параметрлерін баптау", "құжаттың мөлшерін бақылау", "тек азат жол шегіністерін өзгерту"], "ans": 0, "exp": "Пішімдеу сызғышы арқылы сол/оң шегіністерді, бірінші жол шегінісін және табуляцияны баптауға болады."}, {"id": 56, "mod": "m3", "sec": "Абзацтар, шегіністер және интервалдар", "q": "Мәтіннің атауын жолдың ортасына қалай орналастырамыз?", "opts": ["атауды ерекшелеу және [ортасынан туралау] батырмасын басу", "мәтінді тұтастай ерекшелеу және [ортасынан туралау] батырмасын басу", "атауды ерекшелеу және [ені бойынша туралау] батырмасын басу", "мәтінді тұтастай ерекшелеу және [ені бойынша туралау] батырмасын басу"], "ans": 0, "exp": "Тек тақырыпты (атауды) ерекшелеп, «Ортасынан туралау (По центру)» батырмасын басамыз.", "visual": "align_center"}, {"id": 57, "mod": "m3", "sec": "Абзацтар, шегіністер және интервалдар", "q": "Егер бетті сол жағынан да, оң жағынан да түзеу (ені бойынша туралау) керек болса, онда нені таңдайды?", "opts": ["align_justify", "align_right", "align_left", "align_center"], "ans": 0, "exp": "Барлық жолдары бірдей ұзындықтағы батырма — «Ені бойынша туралау (По ширине)».", "optType": "icon"}, {"id": 58, "mod": "m3", "sec": "Абзацтар, шегіністер және интервалдар", "q": "Жоларалық интервалды өзгерту үшін жауапты батырма:", "opts": ["indent_dec", "indent_inc", "list_bullet", "line_spacing"], "ans": 3, "exp": "Екі жақты тік бағдаршасы (↕) бар батырма — жоларалық интервалды баптау.", "optType": "icon"}, {"id": 59, "mod": "m3", "sec": "Абзацтар, шегіністер және интервалдар", "q": "Абзацтағы шегіністі ұлғайту үшін жауапты батырма:", "opts": ["indent_dec", "indent_inc", "list_bullet", "line_spacing"], "ans": 1, "exp": "Оңға бағытталған бағдаршасы (→) бар батырма — абзац шегінісін ұлғайту (Увеличить отступ).", "optType": "icon"}, {"id": 60, "mod": "m3", "sec": "Абзацтар, шегіністер және интервалдар", "q": "Тізім құратын батырма:", "opts": ["indent_dec", "indent_inc", "list_bullet", "line_spacing"], "ans": 2, "exp": "Нүктелері мен жолдары бар батырма — тізім (Маркерленген тізім) құрады.", "optType": "icon"}, {"id": 61, "mod": "m3", "sec": "Абзацтар, шегіністер және интервалдар", "q": "Абзацтың түсін (фонын) өзгертетін батырма:", "opts": ["bucket", "sort_az", "highlight", "font_color"], "ans": 0, "exp": "Бояу шелегі (Заливка) — бүкіл абзацтың немесе кесте ұяшығының фонын бояйды.", "optType": "icon"}, {"id": 62, "mod": "m3", "sec": "Абзацтар, шегіністер және интервалдар", "q": "Пішімдеу сызғышында бірінші жол шегінісі (азат жол) үшін жауапты:", "opts": ["төменгі сол жақтағы үшбұрышты маркер", "жоғарғы үшбұрышты маркер", "төменгі оң жақтағы үшбұрышты маркер", "төмендегі сол жақ шаршы маркер"], "ans": 1, "exp": "Сызғыштағы жоғарғы үшбұрышты маркер бірінші жолдың (қызыл жолдың) шегінісін реттейді."}, {"id": 63, "mod": "m3", "sec": "Нөмірленген және таңбаланған тізімдер", "q": "Артығын таңдаңдар. Тізімдермен жұмыс қашан қажет?", "opts": ["жұмыс жоспарын құрғанда", "әңгіме мәтінін тергенде", "құжаттың мазмұнын құрғанда", "мектептегі сабақ кестесін құрғанда"], "ans": 1, "exp": "Көркем әңгіме мәтіні тұтас абзацтармен жазылады, тізімді қажет етпейді."}, {"id": 64, "mod": "m3", "sec": "Нөмірленген және таңбаланған тізімдер", "q": "Мына берілген қандай тізім?\n• Нан\n• Сүт\n• Кәмпиттер", "opts": ["маркерленген", "нөмірленген", "деңгейлі", "аралас"], "ans": 2, "exp": "Құжат кілтінде C) деңгейлі белгіленген. (Ескерту: шын мәнінде нүктелермен берілген бір деңгейлі тізім — A) маркерленген.)"}, {"id": 65, "mod": "m3", "sec": "Нөмірленген және таңбаланған тізімдер", "q": "Тізімнің түрін анықтаңдар:\nТабиғи – ғылыми пәндер\nа) Алгебра\nб) География", "opts": ["нөмірленген", "маркерленген", "деңгейлі", "аралас"], "ans": 1, "exp": "Құжат кілтінде B) маркерленген белгіленген. (Ескерту: іс жүзінде «а), б)» әріптік белгілеуі — A) нөмірленген тізім.)"}, {"id": 66, "mod": "m3", "sec": "Нөмірленген және таңбаланған тізімдер", "q": "Жолақтың тізімдермен жұмыс істеуге мүмкіндік беретін бөлімі қайсы?", "opts": ["Басты → Абзац", "Басты → Қаріп", "Кірістіру → Тізім", "Бетті белгілеу → Тізім"], "ans": 0, "exp": "Барлық тізім батырмалары «Басты (Главная) → Абзац» тобында орналасқан."}, {"id": 67, "mod": "m3", "sec": "Нөмірленген және таңбаланған тізімдер", "q": "Мәтінді тізімге айналдыру үшін ең алдымен не істеу керек?", "opts": ["нөмірлеуді орнату", "қаріптің түрін таңдау", "мәтінді ерекшелеу", "тізімнің түрін таңдау"], "ans": 3, "exp": "Құжат кілтінде D) тізімнің түрін таңдау белгіленген (дайын мәтін болса, алдымен мәтінді ерекшелеу де қолданылады)."}, {"id": 68, "mod": "m3", "sec": "Нөмірленген және таңбаланған тізімдер", "q": "Нөмірленген тізімді автоматты түрде құру үшін не істеу керек?", "opts": ["тізімнің құрамындағы бірінші пунктті 1 нөмірінен, нүктеден және бос орыннан (пробел) бастау керек", "тізімнің құрамындағы бірінші пунктті «-» белгісінен және бос орыннан бастау керек", "тізімнің құрамындағы бірінші пунктті «-» белгісінен, нүктеден және бос орыннан бастау керек", "тізімді толық теріп, одан кейін бірінші пункттің алдына «-» белгісін қою керек"], "ans": 0, "exp": "«1. » деп теріп бос орын басқанда Word автоматты нөмірленген тізімді қосады."}, {"id": 69, "mod": "m3", "sec": "Нөмірленген және таңбаланған тізімдер", "q": "Мәтінді тізімге айналдыру батырмасы:", "opts": ["align_quad", "list_pair", "indent_pair", "font_size_ud"], "ans": 1, "exp": "Таңбаланған және нөмірленген тізім батырмалары мәтінді тізімге айналдырады.", "optType": "icon"}, {"id": 70, "mod": "m3", "sec": "Нөмірленген және таңбаланған тізімдер", "q": "Нөмірленген тізімді құру батырмасы:", "opts": ["list_multi", "list_num", "list_bullet", "indent_inc"], "ans": 1, "exp": "«1, 2, 3» цифрлары бар батырма — нөмірленген тізімді құру батырмасы.", "optType": "icon"}, {"id": 71, "mod": "m3", "sec": "Нөмірленген және таңбаланған тізімдер", "q": "Таңбаланған тізімді құруға арналған батырма:", "opts": ["list_multi", "list_num", "list_bullet", "indent_inc"], "ans": 2, "exp": "Нүктелері (маркерлері) бар батырма — таңбаланған тізімді құрады.", "optType": "icon"}, {"id": 72, "mod": "m3", "sec": "Нөмірленген және таңбаланған тізімдер", "q": "Тізімді баптау терезесінің «Нөмірдің пішімі» өрісінде:", "opts": ["құрылатын тізім нөмірінің мөлшерін және сыртқы пішімін таңдайды", "тізімнің бетте орналасуын баптайды", "нөмірлеу түрін таңдайды", "саннан немесе әріптен кейін шығарылатын символды тереді"], "ans": 3, "exp": "«Нөмірдің пішімі» (Формат номера) өрісінде сан/әріптен кейінгі нүкте, жақша сияқты белгілер жазылады."}, {"id": 73, "mod": "m3", "sec": "Бағандар", "q": "Мыналардың қайсысын бірнеше бағанға орналастыруға болады:", "opts": ["әңгіме", "өлең", "баяндама", "шығарма"], "ans": 1, "exp": "Өлең жолдары қысқа болғандықтан, оны екі немесе үш бағанға жинақы орналастыру ыңғайлы."}, {"id": 74, "mod": "m3", "sec": "Бағандар", "q": "Бағандарды құру бұйрығы жолақтың қай тіркеме парағында орналасқан?", "opts": ["Бетті белгілеу", "Кірістіру", "Басты", "Терезе"], "ans": 0, "exp": "Бағандар (Колонки) «Бетті белгілеу (Разметка страницы / Макет)» тіркеме парағында орналасқан."}, {"id": 75, "mod": "m3", "sec": "Бағандар", "q": "Бағандарды құрудың алғашқы кезеңі:", "opts": ["мәтінді теру", "бағанды құру бұйрығын таңдау", "бағандар арасындағы қашықтықты анықтау", "алдымен мәтінді теруге де, бағандарға бөлу бұйрығын да беруге болады"], "ans": 3, "exp": "MS Word-та мәтінді теріп болған соң да, термей тұрып та бағандарға бөлуге болады."}, {"id": 76, "mod": "m3", "sec": "Бағандар", "q": "Бос бетте бағандарға бөлуге болатынын (бөлінгенін) қалай анықтауға болады?", "opts": ["Бағандар батырмасының қосулы тұрғанынан", "пішімдеу сызғышы бойынша", "беттің ені бойынша", "қалып-күй жолы бойынша"], "ans": 1, "exp": "Бағандарға бөлінген кезде жоғарғы пішімдеу сызғышы да бірнеше бөлікке бөлініп көрінеді."}, {"id": 77, "mod": "m3", "sec": "Бағандар", "q": "Бағандарға бөлінгеннен кейінгі мәтіннің бастапқы қалпына қалай оралуға болады?", "opts": ["бір бағанды таңдау арқылы", "Тез қол жеткізу тақтасындағы Бас тарту батырмасын басып", "Бағандардан бас тарту арнайы бұйрығын таңдау арқылы", "бағандарды пішімдеу сызғышында жою арқылы"], "ans": 0, "exp": "«Бағандар → Бір (Одна)» бұйрығын таңдау мәтінді бастапқы бір бағанды қалыпқа қайтарады."}, {"id": 78, "mod": "m3", "sec": "Бағандар", "q": "Бағандардың анықтауға болатын ең үлкен мүмкін мәні:", "opts": ["10", "3", "12", "5"], "ans": 2, "exp": "Стандартты А4 кітаптық бетте бағандар саны 12-ге дейін (құжат кілті: 12) орнатылады."}, {"id": 79, "mod": "m3", "sec": "Беттің өлшемдері, ернеулері. Құжатты басып шығару", "q": "Беттің өлшемдерін қандай бұйрықтармен баптайды?", "opts": ["жолақтың Бетті белгілеу → Беттің өлшемдері бұйрығымен", "веб-құжаттың терезесінде", "жолақтың Түр → Беттің өлшемдері бұйрығымен", "жолақтың Басты → Беттің өлшемдері бұйрығымен"], "ans": 0, "exp": "Бет өлшемі (A4, A5, т.б.) «Бетті белгілеу → Беттің өлшемдері (Размер)» арқылы бапталады."}, {"id": 80, "mod": "m3", "sec": "Беттің өлшемдері, ернеулері. Құжатты басып шығару", "q": "Жиекжолақтарды (Поля) баптайды:", "opts": ["құжатты басып шығарған кезде", "жолақтың Түр → Масштаб тіркеме парағында", "жолақтың Бетті белгілеу → Беттің өлшемдері (Параметры страницы) тіркеме парағында", "жолақтың Беттің өлшемдері"], "ans": 2, "exp": "Жиекжолақтар «Бетті белгілеу → Бет параметрлері (Параметры страницы)» бөлімінде реттеледі."}, {"id": 81, "mod": "m3", "sec": "Беттің өлшемдері, ернеулері. Құжатты басып шығару", "q": "Беттің альбомдық теру бағытында:", "opts": ["биіктігі енінен үлкен", "мөлшері бойынша жиекжолақтар тең", "ені биіктігінен үлкен", "ені мен биіктігі тең"], "ans": 2, "exp": "Альбомдық (көлденең) бағдарда парақтың ені оның биіктігінен үлкен болады."}, {"id": 82, "mod": "m3", "sec": "Беттің өлшемдері, ернеулері. Құжатты басып шығару", "q": "Беттің кітаптық теру бағытында:", "opts": ["биіктігі енінен үлкен", "мөлшері бойынша жиекжолақтар тең", "ені биіктігінен үлкен", "ені мен биіктігі тең"], "ans": 0, "exp": "Кітаптық (тік) бағдарда парақтың биіктігі енінен үлкен болады."}, {"id": 83, "mod": "m3", "sec": "Беттің өлшемдері, ернеулері. Құжатты басып шығару", "q": "Айналық жиекжолақтарды (Зеркальные поля) пайдалану керек болатын жағдайлар:", "opts": ["парақтың екі жақ бетіне басып шығару", "парақтың бір жақ бетіне ғана басып шығару", "құжатты тарауларға бөлу", "құжатты екі тең бөлікке бөлу"], "ans": 0, "exp": "Кітапша сияқты екі жақты басып шығарғанда ішкі және сыртқы өрістер симметриялы болуы үшін айналық жиекжолақтар қолданылады."}, {"id": 84, "mod": "m3", "sec": "Беттің өлшемдері, ернеулері. Құжатты басып шығару", "q": "F7 пернетақтасының қызметі:", "opts": ["қаріптің кеглін өзгертеді", "емле қателерін тексереді", "жоларалық интервалды баптайды", "бетті жаңартады"], "ans": 1, "exp": "MS Office бағдарламаларында F7 пернесі орфография мен грамматиканы (емле қателерін) тексереді."}, {"id": 85, "mod": "m3", "sec": "Беттің өлшемдері, ернеулері. Құжатты басып шығару", "q": "Құжатты Алдын ала қарау және басып шығару бұйрықтары қайда орналасқан?", "opts": ["Office батырмасының мәзірінде", "жолақтың Басты тіркеме парағында", "Office → Басып шығару батырмасының мәзірінде", "жолақтың Түр тіркеме парағында"], "ans": 0, "exp": "MS Word 2007-де бұл бұйрықтар жоғарғы сол жақтағы Office батырмасының мәзірінде орналасқан."}, {"id": 86, "mod": "m3", "sec": "Беттің өлшемдері, ернеулері. Құжатты басып шығару", "q": "Тез басып шығару және Басып шығару бұйрықтарының айырмашылығын көрсетіңдер:", "opts": ["Тез басып шығару үнсіз келісім бойынша қолданылатын принтерге бірден жібереді, ал Басып шығару — басып шығару параметрлерін баптаудың сұхбаттық терезесін шығарады", "Басып шығару үнсіз келісім бойынша қолданылатын принтерге бірден жібереді, ал Тез басып шығару сұхбаттық терезесін шығарады", "Екі бұйрық та сұхбаттық терезесін шығарады, тек тез басып шығарғанда алдын ала қарауды пайдалануға болмайды", "Екі бұйрық та сұхбаттық терезесін шығарады, тек Басып шығару бұйрығында алдын ала қарау болмайды"], "ans": 0, "exp": "Тез басып шығару (Быстрая печать) терезе ашпай тікелей принтерге жібереді."}, {"id": 87, "mod": "m3", "sec": "Беттің өлшемдері, ернеулері. Құжатты басып шығару", "q": "Алдын ала қарау терезесінде не істеуге болады?", "opts": ["жиекжолақтарды, теру бағытын, мөлшерлерді, қарау масштабын баптауға", "жиекжолақтарды, теру бағытын, мөлшерлерді, қарау масштабын баптауға, құжатты басып шығару үшін жөнелтуге", "жиекжолақтарды, теру бағытын баптауға, басып шығаруға және мәтінді түзетіп шығуға", "құжатты тек қарап шығуға"], "ans": 1, "exp": "Алдын ала қарау режимінде бет параметрлерін баптауға және тікелей басып шығаруға жіберуге болады."}, {"id": 88, "mod": "m3", "sec": "Беттің өлшемдері, ернеулері. Құжатты басып шығару", "q": "Басып шығару беттерінің диапазонын тағайындау үшін қолданылатын белгілер:", "opts": ["нүктелі үтір және дефис", "үтір", "дефис", "үтір және дефис"], "ans": 3, "exp": "Мысалы: «1, 3, 5-10» — жеке беттер үтірмен, қатар беттер аралығы дефиспен жазылады."}, {"id": 89, "mod": "m3", "sec": "Беттің өлшемдері, ернеулері. Құжатты басып шығару", "q": "Алдын ала қарау терезесінен шығу батырмасы:", "opts": ["zoom_100", "close_preview", "close_red_x", "page_setup"], "ans": 1, "exp": "«Закрыть окно предварительного просмотра» батырмасы алдын ала қарау режимін жабады.", "optType": "icon"}, {"id": 90, "mod": "m4", "sec": "Кестелер. Кестелерді құру", "q": "Кесте құру бұйрығы қайда орналасқан?", "opts": ["жолақтың Кірістіру бөлімінде", "жолақтың Басты → Кестелер бөлімінде", "жанама мәзірде", "Office батырмасының мәзірінде"], "ans": 0, "exp": "Кестелер «Кірістіру (Вставка) → Кесте (Таблица)» бұйрығы арқылы құрылады."}, {"id": 91, "mod": "m4", "sec": "Кестелер. Кестелерді құру", "q": "Экспресс-кесте бұйрығының қызметі:", "opts": ["кестені тез құруға мүмкіндік береді", "кестенің артық элементтерін жояды", "10×10 мөлшерлі стандартты кестені қосады", "кестелердің дайын шаблондарын қосады"], "ans": 3, "exp": "Экспресс-кестелер күнтізбе, матрица сияқты дайын безендірілген кесте шаблондарын қосады."}, {"id": 92, "mod": "m4", "sec": "Кестелер. Кестелерді құру", "q": "Кестенің ұяшықтары бойынша қалай жылжуға болады?", "opts": ["қажет ұяшықтарды тінтуірмен шерту арқылы", "бос орын", "F1-F12 пернелерімен", "меңзерді басқару пернелерімен"], "ans": 0, "exp": "Құжат кілті: A) қажет ұяшықтарды тінтуірмен шерту арқылы (сондай-ақ Tab және бағдарша пернелері де қолданылады)."}, {"id": 93, "mod": "m4", "sec": "Кестелер. Кестелерді құру", "q": "Кестенің соңына жаңа жол қосу үшін қандай пернені басу керек?", "opts": ["Shift", "Tab", "Ins", "Break"], "ans": 1, "exp": "Кестенің ең соңғы оң жақ төменгі ұяшығында тұрып Tab пернесін бассаңыз, жаңа жол қосылады."}, {"id": 94, "mod": "m4", "sec": "Кестелер. Кестелерді құру", "q": "Кестенің бір ұяшығына кері жылжу үшін қандай пернелерді басу керек?", "opts": ["Shift+Ins", "Shift+Break", "Shift+Tab", "Tab"], "ans": 2, "exp": "Tab — келесі ұяшыққа, ал Shift+Tab — алдыңғы ұяшыққа кері жылжытады."}, {"id": 95, "mod": "m4", "sec": "Кестелерді түзету", "q": "Кестенің бірнеше ұяшығын бір ұяшыққа біріктіру үшін не істеу керек?", "opts": ["жолақтың Кесте тіркеме парағындағы бұйрықтарды пайдалану", "ұяшықтарды ерекшелеп, Макет → Ұяшықтарды біріктіру бұйрығын таңдау", "ұяшықтарды ерекшелеп, Конструктор → Ұяшықтарды біріктіру бұйрығын таңдау", "ұяшықтарды ерекшелемей, Макет → Ұяшықтарды біріктіру сұхбаттық терезесін ашу"], "ans": 1, "exp": "Ұяшықтарды біріктіру (Объединить ячейки) «Кестелермен жұмыс → Макет» тіркеме парағында орналасқан."}, {"id": 96, "mod": "m4", "sec": "Кестелерді түзету", "q": "Бір ұяшықты бірнеше ұяшықтарға бөлуге болмайтын тәсілді көрсетіңдер:", "opts": ["бөлу сызығын қарындашпен салу", "Макет → Ұяшықтарды бөлу бұйрығы", "қажетті ұяшықта шақырылған жанама мәзірде Ұяшықты бөлу бұйрығын пайдалану", "Кірістіру → Кесте → Ұяшықты бөлу бұйрығын пайдалану"], "ans": 3, "exp": "«Кірістіру → Кесте» мәзірінде «Ұяшықты бөлу» бұйрығы жоқ — ол тек Макет және жанама мәзірде бар."}, {"id": 97, "mod": "m4", "sec": "Кестелерді түзету", "q": "Кестенің іргелес бағандарын ерекшелеу үшін қандай пернені ұстап тұру керек?", "opts": ["Shift", "Ctrl", "Alt", "Fn"], "ans": 0, "exp": "Қатар (іргелес) бағандарды немесе жолдарды ерекшелеу үшін Shift пернесі ұсталады."}, {"id": 98, "mod": "m4", "sec": "Кестелерді түзету", "q": "Кестенің іргелес емес бағандарын ерекшелеу үшін қандай пернені ұстап тұру керек?", "opts": ["Shift", "Ctrl", "Alt", "Fn"], "ans": 1, "exp": "Бір-бірінен бөлек орналасқан (іргелес емес) бағандарды ерекшелеу үшін Ctrl пернесі қолданылады."}, {"id": 99, "mod": "m4", "sec": "Кестелерді түзету", "q": "Егер бағанның енін пішімдеу сызығы бойынша өзгертетін болсақ, онда:", "opts": ["ен көрші баған енінің есебінен өзгереді, кестенің жалпы ені өзгермейді", "ен көрші баған енінің есебінен өзгереді, кестенің жалпы ені де өзгереді", "көрші бағанның және кестенің жалпы ені өзгеріссіз қалады", "көрші бағанның ені өзгеріссіз қалады, кесте тұтастай жылжиды"], "ans": 3, "exp": "Құжат кілті: D) көрші бағанның ені өзгеріссіз қалады, кесте тұтастай жылжиды."}, {"id": 100, "mod": "m4", "sec": "Кестелерді пішімдеу", "q": "Кестені әрлеу (безендіру) үшін жолақтың қандай тіркеме парағы қолданылады?", "opts": ["Басты", "Конструктор", "Кестелер", "Макет"], "ans": 1, "exp": "Кесте стильдері, шекаралары мен бояуы «Кестелермен жұмыс → Конструктор» тіркеме парағында бапталады."}, {"id": 101, "mod": "m4", "sec": "Кестелерді пішімдеу", "q": "Қаламұштың мәнерін (сызық түрін) таңдау батырмасы:", "opts": ["pen_style", "pen_weight", "borders", "shading_lbl"], "ans": 0, "exp": "Үздіксіз/үзік сызық бейнеленген бірінші тізім — қаламұштың мәнері (Стиль пера).", "optType": "icon"}, {"id": 102, "mod": "m4", "sec": "Кестелерді пішімдеу", "q": "Қаламұштың жуандығын таңдау батырмасы:", "opts": ["pen_style", "pen_weight", "borders", "shading_lbl"], "ans": 1, "exp": "«0,5 пт ▼» тізімі — сызық (қаламұш) жуандығын таңдайды.", "optType": "icon"}, {"id": 103, "mod": "m4", "sec": "Кестелерді пішімдеу", "q": "Кесте ұяшығының құйып бояуы (Заливка) батырмасы:", "opts": ["pen_style", "pen_weight", "borders", "shading_lbl"], "ans": 3, "exp": "Шелек белгішесі бар «Заливка ▼» батырмасы кесте ұяшықтарын түске бояйды.", "optType": "icon"}, {"id": 104, "mod": "m4", "sec": "Кестелерді пішімдеу", "q": "Шекаралар (Границы) бұйрығымен орындауға болмайды:", "opts": ["кестенің ішкі және сыртқы шекараларын қосуға", "кестенің ішкі шекараларын жеке қосуға", "кестені көрінбейтін етуге", "кестенің ішіндегі мәтіннің әрпін өзгертуге"], "ans": 3, "exp": "Шекаралар тек кесте сызықтарын басқарады; мәтін қарпі «Басты → Қаріп» бөлімінде өзгертіледі."}, {"id": 105, "mod": "m4", "sec": "Графикалық нысандар мен көркем жазуды кірістіру", "q": "Графикалық редакторда құрылған суретті мәтіндік құжатқа ненің көмегімен қосуға болады?", "opts": ["алмасу буферінің", "жолақтың Пішім тіркеме парағының", "жолақтың Кірістіру тіркеме парағының", "пішімдеу сызғышының"], "ans": 0, "exp": "Құжат кілті: A) алмасу буферінің (Ctrl+C → Ctrl+V арқылы басқа редактордан тікелей көшіріп қою)."}, {"id": 106, "mod": "m4", "sec": "Графикалық нысандар мен көркем жазуды кірістіру", "q": "Қате тұжырымды көрсетіңдер:", "opts": ["WordArt нысанын құжатқа жолақтың Кірістіру тіркеме парағының көмегімен қосуға болады", "WordArt нысанының мәтінін кейін өзгертуге болмайды", "WordArt нысанымен істелінетін жұмыс кез келген графикалық нысанмен орындалатын жұмыс сияқты", "Құжатқа қанша болса да декоративтік мәтіндер қосуға болады"], "ans": 1, "exp": "WordArt мәтінін кез келген уақытта шертіп қайта өңдеп, өзгертуге болады — сондықтан B тұжырымы қате."}, {"id": 107, "mod": "m4", "sec": "Графикалық нысандар мен көркем жазуды кірістіру", "q": "Кірістіру → Иллюстрациялар → Бейнебаян (Клип) бұйрығы:", "opts": ["құжатқа ғаламтор желісінен алынған суретті қосуға мүмкіндік бермейді", "тұтынушының өз суретін құруға арналған", "әртүрлі күрделілік дәрежесіндегі сызбаларды құруға мүмкіндік береді", "құжатқа MS Office суреттер қорынан алынған суретті қосуға мүмкіндік береді"], "ans": 3, "exp": "«Клип / Бейнебаян» бұйрығы MS Office-тің кіріктірілген суреттер жинағынан иллюстрация қосады."}, {"id": 108, "mod": "m4", "sec": "Графикалық нысандар мен көркем жазуды кірістіру", "q": "Кірістіру → Иллюстрациялар → Сурет (Рисунок) бұйрығы:", "opts": ["құжатқа суретті файлдан алуға мүмкіндік береді", "тұтынушының өз суретін құруға арналған", "әртүрлі күрделілік дәрежесіндегі сызбаларды құруға мүмкіндік береді", "құжатқа MS Office суреттер қорынан алынған суретті қосуға мүмкіндік береді"], "ans": 0, "exp": "«Сурет (Рисунок)» бұйрығы компьютер дискісіндегі сурет файлын құжатқа кірістіреді."}, {"id": 109, "mod": "m4", "sec": "Графикалық нысандар мен көркем жазуды кірістіру", "q": "Құжатқа фигураны мына бұйрықтардың қайсысының көмегімен қосуға болады?", "opts": ["Кірістіру → Иллюстрациялар → Бейнебаян", "Кірістіру → Иллюстрациялар → Сурет", "Кірістіру → Иллюстрациялар → Фигуралар", "Кірістіру → Мәтін → WordArt"], "ans": 2, "exp": "Геометриялық фигуралар мен сызықтар «Кірістіру → Иллюстрациялар → Фигуралар» арқылы қосылады."}, {"id": 110, "mod": "m4", "sec": "Графикалық нысандар мен көркем жазуды кірістіру", "q": "Декоративтік (көркем) мәтінді қосу үшін қолданылатын бұйрық:", "opts": ["Кірістіру → Иллюстрациялар → Бейнебаян", "Кірістіру → Иллюстрациялар → Сурет", "Кірістіру → Иллюстрациялар → Фигуралар", "Кірістіру → Мәтін → WordArt"], "ans": 3, "exp": "Көркем жазулар WordArt құралы арқылы («Кірістіру → Мәтін → WordArt») жасалады."}, {"id": 111, "mod": "m4", "sec": "Атау жазулар мен суреттерді пішімдеу", "q": "Бірнеше нысанды ерекшелеу үшін қолданылатын перне:", "opts": ["Ctrl", "Alt", "Tab", "Shift"], "ans": 0, "exp": "Құжат кілті: A) Ctrl (бірнеше графикалық нысанды Ctrl пернесін басып тұрып біртіндеп шерту арқылы ерекшелейді)."}, {"id": 112, "mod": "m4", "sec": "Атау жазулар мен суреттерді пішімдеу", "q": "Нысандарды топтастыру және кері топтастыру бұйрықтары:", "opts": ["экранда тұрақты меңзердің құжаттағы орнынан тәуелсіз орналасады", "тек нысанның үстінен шақырылған жанама мәзірде орналасады", "егер бөлініп шығарылған нысан пайда болатын болса, Формат лентасының тіркеме парағында және шақырылған нысан контекстік мәзірінде орналасады", "тек Формат жолағының тіркеме парағында ғана орналасады"], "ans": 2, "exp": "Нысандар ерекшеленгенде «Формат» тіркеме парағында да, оң батырманың контекстік мәзірінде де «Топтастыру» шығады."}, {"id": 113, "mod": "m4", "sec": "Атау жазулар мен суреттерді пішімдеу", "q": "Фигурадағы бетіне жазу (мәтін қосу):", "opts": ["тек бір ғана нысанда жазу болуы мүмкін", "мәтінді қосу контекстік мәзір бұйрығымен кез келген пішінге (сызықтардан басқа) қосылады", "тек негізгі пішіндер бөлігінің нысандарында ғана болуы мүмкін", "тек WordArt арқылы ғана қосылады"], "ans": 1, "exp": "Сызықтар мен бағдаршалардан басқа кез келген тұйық фигураға оң батырма → «Мәтін қосу» арқылы жазуға болады."}, {"id": 114, "mod": "m5", "sec": "Тұсаукесер туралы жалпы мәліметтер (PowerPoint)", "q": "Тұсаукесерлер құруға арналған программа қалай аталады?", "opts": ["мәтіндік процессор", "графикалық редактор", "операциялық жүйе", "тұсаукесерлер құрушы конструктор"], "ans": 3, "exp": "PowerPoint сияқты бағдарламалар тұсаукесерлер құрушы конструктор деп аталады."}, {"id": 115, "mod": "m5", "sec": "Тұсаукесер туралы жалпы мәліметтер (PowerPoint)", "q": "Microsoft PowerPoint программасын қалай іске қосамыз?", "opts": ["Бастау → Программалар → Microsoft Office", "Бастау → Программалар → Стандарттық", "Бастау → Программалар → Стандарттық → Қызметші", "Бастау → Программалар → Microsoft Word"], "ans": 0, "exp": "PowerPoint Microsoft Office пакетінің құрамына кіреді."}, {"id": 116, "mod": "m5", "sec": "Тұсаукесер туралы жалпы мәліметтер (PowerPoint)", "q": "Әр слайдпен жеке жұмыс істейтін қарау режимін таңдаңдар:", "opts": ["сұрыптауыш", "әдеттегі", "слайдтар көрсету", "ескертпе беттері"], "ans": 1, "exp": "«Әдеттегі (Обычный)» режим — слайдтарды жеке-жеке өңдеуге арналған негізгі жұмыс режимі."}, {"id": 117, "mod": "m5", "sec": "Тұсаукесер туралы жалпы мәліметтер (PowerPoint)", "q": "Жолақтың қай тіркеме бетінде қарау режимдерін ауыстыруды орындайды?", "opts": ["Басты", "Түр", "Дизайн", "Кірістіру"], "ans": 1, "exp": "Қарау режимдері (Әдеттегі, Сұрыптауыш, Ескертпе беттері) «Түр (Вид)» тіркеме парағында орналасқан."}, {"id": 118, "mod": "m5", "sec": "Тұсаукесер туралы жалпы мәліметтер (PowerPoint)", "q": "Тұсаукесер қандай бұйрықтың көмегімен құрылады?", "opts": ["Office батырмасы → Құру", "Басты → Құру", "Басты → Бос тұсаукесерді құру", "Басты → Бос тұсаукесерді шаблоннан құру"], "ans": 0, "exp": "Жаңа тұсаукесер «Office батырмасы (немесе Файл) → Құру (Создать)» арқылы ашылады."}, {"id": 119, "mod": "m5", "sec": "Тұсаукесер туралы жалпы мәліметтер (PowerPoint)", "q": "Тұсаукесерге жаңа слайдты қалай қосамыз?", "opts": ["Басты → Слайд құру", "Дизайн → Слайд құру", "Office батырмасы → Слайд құру", "Басты → Макет"], "ans": 0, "exp": "«Басты → Слайд құру (Создать слайд)» немесе Ctrl+M пернесі жаңа слайд қосады."}, {"id": 120, "mod": "m5", "sec": "Тұсаукесер туралы жалпы мәліметтер (PowerPoint)", "q": "Жаңа тұсаукесердің бірінші слайды құрамына кіретін әдеттегі макет:", "opts": ["тақырып және нысан", "титул (алғашқы бет)", "бөлімнің тақырыбы", "екі нысан"], "ans": 1, "exp": "Бірінші слайд әдепкі бойынша «Титул слайды (Титульный слайд)» макетімен құрылады."}, {"id": 121, "mod": "m5", "sec": "Тұсаукесер туралы жалпы мәліметтер (PowerPoint)", "q": "Ағымдағы слайдты жою бұйрығы:", "opts": ["Басты → Слайдты жою", "Дизайн → Слайдты жою", "Office батырмасы → Слайдты жою", "Басты → Макет → Слайдты жою"], "ans": 0, "exp": "«Басты → Слайдты жою (Удалить)» немесе Delete пернесі таңдалған слайдты жояды."}, {"id": 122, "mod": "m5", "sec": "Тұсаукесер туралы жалпы мәліметтер (PowerPoint)", "q": "Жасырын слайд қалай жұмыс істейді?", "opts": ["ол тұсаукесердің ешбір қарау режимінде көрінбейді", "тек сұрыптағыш режимінде көрінеді", "әдеттегі режимде және сұрыптағыш режимінде көрінеді, бірақ тұсаукесердің көрсетілуі (демонстрациясы) кезінде өткізіп жіберіледі", "тек тұсаукесердің көрсетілуі (демонстрациясы) режимінде көрінеді"], "ans": 2, "exp": "Жасырын слайд өңдеу режимдерінде көрінеді, ал F5 көрсетілімі кезінде экранға шықпайды."}, {"id": 123, "mod": "m5", "sec": "Тұсаукесер туралы жалпы мәліметтер (PowerPoint)", "q": "Бірнеше іргелес слайдтарды қандай пернемен ерекшелейді?", "opts": ["Shift", "Alt", "Ctrl", "Capslock"], "ans": 0, "exp": "Қатар орналасқан (іргелес) слайдтарды ерекшелеу үшін Shift пернесі басылады."}, {"id": 124, "mod": "m5", "sec": "Тұсаукесерді безендіру", "q": "Тұсаукесерді безендіру үшін жолақтың қай тіркеме парағы жауап береді?", "opts": ["Басты", "Кірістіру", "Дизайн", "Түр"], "ans": 2, "exp": "Тақырыптар, түстер сызбасы және фон «Дизайн» тіркеме парағында бапталады."}, {"id": 125, "mod": "m5", "sec": "Тұсаукесерді безендіру", "q": "Тұсаукесер слайдтарының жалпы безендіруін нені түзетіп, өзгерте аламыз?", "opts": ["тақырыбын", "анимацияны", "әріптерді", "әсерлерді"], "ans": 0, "exp": "«Дизайн → Тақырыптар (Темы)» арқылы бүкіл тұсаукесердің жалпы безендіру стилін бірден өзгертуге болады."}, {"id": 126, "mod": "m5", "sec": "Тұсаукесерді безендіру", "q": "Слайдтарға, ескертпелер беттеріне немесе үлестіру материалдарына қолданылатын сегіз үйлесімді түстерден таңдап алынған жиын – ол:", "opts": ["тақырып", "түстер сызбасы", "әріптер", "әсерлер"], "ans": 1, "exp": "Түстер сызбасы (Цветовая схема) — бір-бірімен үйлесетін 8 негізгі түстен тұратын жиын."}, {"id": 127, "mod": "m5", "sec": "Тұсаукесерді безендіру", "q": "Фонның құйып бояуының түсін өзгерту үшін қандай бұйрықты шақыру керек?", "opts": ["Дизайн → Фонның мәнерлері → Фонның пішімі", "Дизайн → Беттің параметрлері", "Дизайн → Түстер сызбасы", "Тақырып"], "ans": 3, "exp": "Құжат кілтінде D) Тақырып белгіленген. (Ескерту: нақты PowerPoint-та фон түсін тікелей «A) Дизайн → Фонның мәнерлері → Фонның пішімі» арқылы өзгертеді.)"}, {"id": 128, "mod": "m5", "sec": "Нысандарды компьютерлік тұсаукесерге кірістіру", "q": "Нысандарды тұсаукесерге қосу үшін жолақтың қандай тіркеме парағы жауапты?", "opts": ["Басты", "Кірістіру", "Дизайн", "Түр"], "ans": 2, "exp": "Құжат кілтінде C) Дизайн белгіленген. (Ескерту: іс жүзінде барлық нысандар «B) Кірістіру (Вставка)» парағынан қосылады!)"}, {"id": 129, "mod": "m5", "sec": "Нысандарды компьютерлік тұсаукесерге кірістіру", "q": "Сендер слайдқа көлемі 100 Кбайттан артық дыбыстық файл қостыңдар делік. Дұрыс бекімді атаңдар.", "opts": ["дыбыс тұсаукесерге енгізілетін болады", "дыбыс бөлек файлда сақталатын болады", "Тұсаукесерде оған сілтеме сақталады, дыбыс слайдқа қосылмайды", "дыбыс толық ойналмайды"], "ans": 1, "exp": "PowerPoint 2007 стандарты бойынша 100 Кбайттан үлкен WAV/дыбыс файлы ішіне енгізілмей, бөлек файлда (сілтемемен) сақталады."}, {"id": 130, "mod": "m5", "sec": "Нысандарды компьютерлік тұсаукесерге кірістіру", "q": "Егер беттегі белгілеуде қарастырылмаған болса, слайдтың мәтіндік бетіне жазу кірістіру үшін не істеу керек?", "opts": ["слайдты екі рет шертіп, таңдалған жерден бастап жазу", "жолақтың Кірістіру тіркеме парағының Бетіне жазу батырмасын пайдалану", "шекаралық сызықтары өшірілген кестелерді қосуды қолдану", "бетті белгілеуді өзгерту"], "ans": 3, "exp": "Құжат кілтінде D) бетті белгілеуді өзгерту белгіленген. (Тәжірибеде B) Кірістіру → Жазу (Надпись) батырмасы да жиі қолданылады.)"}, {"id": 131, "mod": "m5", "sec": "Нысандарды компьютерлік тұсаукесерге кірістіру", "q": "Микрофоннан дыбысты қалай жазамыз?", "opts": ["Кірістіру → Дыбыс → Дыбысты жазу бұйрығының көмегімен", "дыбысты тек алдын ала жазылған файлдан енгізуге болады", "Дизайн → Дыбыс → Дыбысты жазу бұйрығымен", "Басты → Дыбыс → Дыбысты жазу бұйрығымен"], "ans": 0, "exp": "Тікелей микрофоннан жазу «Кірістіру → Дыбыс → Дыбысты жазу (Записать звук)» арқылы орындалады."}, {"id": 132, "mod": "m6", "sec": "Компьютерлік желілердің негізгі түрлері. Ғаламтор", "q": "Компьютерді телефонға (телефон желісіне) қосудың құралы:", "opts": ["желілік карта", "сканер", "модем (құжатта: содем)", "телефон кабелі"], "ans": 2, "exp": "Модем (модулятор-демодулятор) компьютерді телефон желісі арқылы интернетке қосады."}, {"id": 133, "mod": "m6", "sec": "Компьютерлік желілердің негізгі түрлері. Ғаламтор", "q": "Браузер-программа (құжат кілті бойынша):", "opts": ["Internet Explorer", "Mozilla Firefox", "Opera", "Google Chrome"], "ans": 2, "exp": "Құжат кілтінде C) Opera белгіленген (негізінде 4 нұсқаның бәрі де веб-браузерлер!)."}, {"id": 134, "mod": "m6", "sec": "Компьютерлік желілердің негізгі түрлері. Ғаламтор", "q": "Браузер парағын жаңалау үшін қай батырманы басу керек?", "opts": ["F5", "F1", "Enter", "Tab"], "ans": 0, "exp": "F5 (немесе Ctrl+R) пернесі ағымдағы веб-парақты қайта жүктеп жаңартады."}, {"id": 135, "mod": "m6", "sec": "Компьютерлік желілердің негізгі түрлері. Ғаламтор", "q": "Егер браузерде мәтін көрінбесе (немесе бет дұрыс жүктелмесе):", "opts": ["Избранное парағына парақ қосу", "Кодировка → Автотаңдау бұйрығын орындау", "F5 пернесін басып, парақты жаңалау", "Сервис → Свойства бұйрықтарын орындау"], "ans": 2, "exp": "Құжат кілті: C) F5 пернесін басып, парақты жаңалау (ал иероглиф шықса — Кодировка → Автотаңдау)."}, {"id": 136, "mod": "m6", "sec": "Компьютерлік желілердің негізгі түрлері. Ғаламтор", "q": "Үй парағы (Домашняя страница):", "opts": ["ғаламтор желісіне қосылмай жүктеледі", "браузермен жүктеледі", "желіде жұмыс істегенде ашық қала береді", "home.kz атауын иемденеді"], "ans": 1, "exp": "Үй парағы — браузер іске қосылған сәтте автоматты түрде жүктелетін бастапқы бет."}, {"id": 137, "mod": "m6", "sec": "Компьютерлік вирустар және Антивирус", "q": "Вирус – ол...", "opts": ["дискілерді тексеру құралы", "файлдарды көшіруге арналған программа", "операциялық жүйедегі қателердің салдары", "көбеюге қабілетті зақымдаушы программа"], "ans": 3, "exp": "Компьютерлік вирус — өздігінен көбеюге және деректер мен программаларды зақымдауға қабілетті зиянды код."}, {"id": 138, "mod": "m6", "sec": "Компьютерлік вирустар және Антивирус", "q": "Вирустың компьютерге өтуінің көзі бола алмайтын құрылғы:", "opts": ["Модем", "Электрондық пошта", "Қатты диск", "Ажыратып алынатын тасығыштар"], "ans": 0, "exp": "Құжат кілті: A) Модем (модем тек сигнал тасымалдау құрылғысы, вирус сақтайтын жад тасығышы емес)."}, {"id": 139, "mod": "m6", "sec": "Компьютерлік вирустар және Антивирус", "q": "Антивирус – ол...", "opts": ["Файлдарды сығуға арналған программа", "Файлдарды көшіруге арналған программа", "Компьютерлік вирустарды жоюға арналған программа", "Вирустарды құруға арналған программа"], "ans": 2, "exp": "Антивирус зиянды бағдарламаларды анықтап, жоюға және алдын алуға арналған."}, {"id": 140, "mod": "m6", "sec": "Компьютерлік вирустар және Антивирус", "q": "Антивирус не істей алмайды?", "opts": ["Файлдарды сканерлей алмайды", "Мұрағаттарды қарай алмайды", "Файлдарды қайта қалпына келтіре алмайды", "Файлдарды сығыстыра алмайды"], "ans": 3, "exp": "Файлдарды сығыстыру (архивтеу) — мұрағаттаушы программалардың (WinRAR, 7-Zip) қызметі."}, {"id": 141, "mod": "m6", "sec": "Компьютерлік вирустар және Антивирус", "q": "Компьютердің вируспен зақымдануының алдын алудағы бұрыс кеңесті табыңдар:", "opts": ["Бейтаныс адамдар жіберген хаттарды және хаттардың тіркемелерін ешқашан ашпау", "Компьютерде «әкімшілік (администратор)» мәртебесінде емес, шектелген есепке алу жазбасында жұмыс істеу", "Компьютердегі барлық бумаларға толық қол жеткізу құқын әрқашан ашып қою", "Вирусқа қарсы қорларды жүйелі түрде жаңартып отыру"], "ans": 2, "exp": "Барлық бумаларға толық қолжетімділік ашып қою қауіпсіздікті күрт төмендетеді — бұл бұрыс кеңес."}, {"id": 142, "mod": "m6", "sec": "Ақпаратты сығу. Мұрағаттау программалары", "q": "Файлдарды мұрағаттау деген не?", "opts": ["Файлдарды Қоржынға жою", "Оларды жеке бумаға біріктіру", "Оларды бір мезгілде сыға отырып, бір файлға қою", "Кеңседегі құжаттарды қоюға арналған арнайы орын"], "ans": 2, "exp": "Мұрағаттау (архивтеу) — бір немесе бірнеше файлды көлемін кішірейте (сыға) отырып, бір архив файлына біріктіру."}, {"id": 143, "mod": "m6", "sec": "Ақпаратты сығу. Мұрағаттау программалары", "q": "Мұрағаттауды қашан орындау керек?", "opts": ["Дискіде орын жетпесе", "Файлдар көп болса", "Файлдар аз болса", "Ойын ойнағанда"], "ans": 0, "exp": "Мұрағаттау дискідегі орынды үнемдеу және файлдарды жинақы сақтау/жіберу үшін орындалады."}, {"id": 144, "mod": "m6", "sec": "Ақпаратты сығу. Мұрағаттау программалары", "q": "Мұрағаттық файлдың құрамына не кіруі мүмкін?", "opts": ["Тек бумалар", "Файлдар да, бумалар да", "Тек файлдар", "Файлдар да емес, бумалар да емес"], "ans": 1, "exp": "Архив ішіне кез келген типтегі файлдар да, ішкі құрылымымен бірге бумалар да салына алады."}, {"id": 145, "mod": "m6", "sec": "Ақпаратты сығу. Мұрағаттау программалары", "q": "Мұрағаттауды жүзеге асыратын программаны көрсетіңдер:", "opts": ["Windows", "Microsoft Word", "Paint", "WinRar"], "ans": 3, "exp": "WinRAR (сондай-ақ 7-Zip, WinZip) — танымал мұрағаттаушы программа."}];
+
+const BLOCKS_30 = [
+  { id: 1, badge: "1-БЛОК · №1–30",   title: "1-Блок (1–30 сұрақ)",   desc: "Компьютер тарихы, ДК сәулеті, Алгоритмдер және блок-сызбалар.", start: 0,   end: 30 },
+  { id: 2, badge: "2-БЛОК · №31–60",  title: "2-Блок (31–60 сұрақ)",  desc: "Циклдік алгоритм, Модельдеу, Word интерфейсі, Мәтін пішімдеу және SVG батырмалар.", start: 30,  end: 60 },
+  { id: 3, badge: "3-БЛОК · №61–90",  title: "3-Блок (61–90 сұрақ)",  desc: "Абзацтар, интервалдар, тізімдер, бағандар, бет өлшемдері және басып шығару.", start: 60,  end: 90 },
+  { id: 4, badge: "4-БЛОК · №91–120", title: "4-Блок (91–120 сұрақ)", desc: "Кесте құру/түзету/пішімдеу, WordArt, графика және PowerPoint негіздері.", start: 90,  end: 120 },
+  { id: 5, badge: "5-БЛОК · №121–145",title: "5-Блок (121–145 сұрақ)",desc: "PowerPoint безендіру & дыбыс, Желілер/Ғаламтор, Вирустар және Мұрағаттау.", start: 120, end: 145 },
+];
+
+// ============================================================================
+// AUTHENTIC MS WORD RIBBON SVG ICON RENDERER
+// ============================================================================
+const ICON_LABELS = {
+  bucket: "Заливка (Абзац фоны)",
+  sort_az: "Сұрыптау (А→Я)",
+  highlight: "Мәтінді ерекшелеу (ab)",
+  font_color: "Қаріп түсі (A)",
+  clear_fmt: "Пішімдеуді тазалау (Aa)",
+  strike: "Сызылған мәтін (abe)",
+  font_size_ud: "Өлшемді үлкейту/кішірейту (A▲ A▼)",
+  font_family: "Қаріп түрі (Times New Roman)",
+  font_size_num: "Қаріп кеглі (12 ▼)",
+  align_left: "Сол жақтан туралау",
+  align_center: "Ортасынан туралау",
+  align_right: "Оң жақтан туралау",
+  align_justify: "Ені бойынша туралау",
+  indent_dec: "Шегіністі азайту",
+  indent_inc: "Шегіністі ұлғайту",
+  list_bullet: "Таңбаланған тізім (•)",
+  list_num: "Нөмірленген тізім (1,2,3)",
+  list_multi: "Көпдеңгейлі тізім",
+  list_pair: "Тізімдер (• және 1,2,3)",
+  align_quad: "Туралау батырмалары",
+  indent_pair: "Шегініс батырмалары",
+  line_spacing: "Жоларалық интервал (↕)",
+  zoom_100: "Масштаб 100%",
+  close_preview: "Алдын ала қарауды жабу (×)",
+  close_red_x: "Терезені жабу (X)",
+  page_setup: "Бет параметрлері",
+  pen_style: "Қаламұш мәнері (──── ▼)",
+  pen_weight: "Қаламұш жуандығы (0,5 пт ▼)",
+  borders: "Шекаралар (Границы ▼)",
+  shading_lbl: "Құйып бояу (Заливка ▼)"
+};
+
+function renderIconSVG(key) {
+  const dd = (x, y) => `<polygon points="${x},${y} ${x+6},${y} ${x+3},${y+4}" fill="#334155"/>`;
+  switch (key) {
+    case 'bucket':
+      return `<svg viewBox="0 0 46 32" width="46" height="32"><path d="M12 15 L20 7 L27 14 L19 22 Z" fill="#cbd5e1" stroke="#334155" stroke-width="1.6"/><path d="M9 18 C7 21 9 23 11 21 C12 20 11 17 9 18 Z" fill="#0284c7"/><rect x="6" y="25" width="24" height="4" fill="#3b82f6"/>${dd(35,14)}</svg>`;
+    case 'sort_az':
+      return `<svg viewBox="0 0 38 32" width="38" height="32"><text x="6" y="14" font-family="Georgia,serif" font-weight="bold" font-size="13" fill="#1d4ed8">А</text><text x="6" y="28" font-family="Georgia,serif" font-weight="bold" font-size="13" fill="#dc2626">Я</text><line x1="25" y1="6" x2="25" y2="25" stroke="#334155" stroke-width="2"/><polygon points="21,21 29,21 25,27" fill="#334155"/></svg>`;
+    case 'highlight':
+      return `<svg viewBox="0 0 46 32" width="46" height="32"><text x="6" y="18" font-family="Arial,sans-serif" font-weight="bold" font-size="13" fill="#0f172a">ab</text><path d="M22 15 L29 6 L33 9 L26 18 Z" fill="#facc15" stroke="#854d0e" stroke-width="1.2"/><rect x="5" y="23" width="26" height="5" fill="#facc15"/>${dd(36,14)}</svg>`;
+    case 'font_color':
+      return `<svg viewBox="0 0 46 32" width="46" height="32"><text x="16" y="21" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="19" fill="#0f172a">A</text><rect x="6" y="24" width="22" height="5" fill="#dc2626"/>${dd(35,14)}</svg>`;
+    case 'clear_fmt':
+      return `<svg viewBox="0 0 42 32" width="42" height="32"><text x="4" y="20" font-family="Arial,sans-serif" font-weight="bold" font-size="14" fill="#1e293b">Aa</text><polygon points="20,24 30,13 36,19 26,28" fill="#f472b6" stroke="#831843" stroke-width="1.4"/></svg>`;
+    case 'strike':
+      return `<svg viewBox="0 0 44 32" width="44" height="32"><text x="22" y="20" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" fill="#0f172a">abe</text><line x1="6" y1="16" x2="38" y2="16" stroke="#0f172a" stroke-width="1.6"/></svg>`;
+    case 'font_size_ud':
+      return `<svg viewBox="0 0 54 32" width="54" height="32"><text x="10" y="24" font-family="Georgia,serif" font-weight="bold" font-size="18" fill="#0f172a">A</text><polygon points="21,11 27,11 24,6" fill="#0284c7"/><text x="32" y="24" font-family="Georgia,serif" font-weight="bold" font-size="14" fill="#0f172a">A</text><polygon points="42,9 48,9 45,14" fill="#0284c7"/></svg>`;
+    case 'font_family':
+      return `<svg viewBox="0 0 128 28" width="128" height="28"><rect x="1" y="2" width="126" height="24" rx="3" fill="#fff" stroke="#64748b" stroke-width="1.4"/><text x="8" y="18" font-family="Times New Roman,serif" font-size="12.5" fill="#0f172a">Times New Roman</text>${dd(115,12)}</svg>`;
+    case 'font_size_num':
+      return `<svg viewBox="0 0 58 28" width="58" height="28"><rect x="1" y="2" width="56" height="24" rx="3" fill="#fff" stroke="#64748b" stroke-width="1.4"/><text x="10" y="18" font-family="Arial,sans-serif" font-size="13" fill="#0f172a">12</text>${dd(43,12)}</svg>`;
+    case 'align_left':
+      return `<svg viewBox="0 0 36 30" width="36" height="30"><line x1="5" y1="6" x2="31" y2="6" stroke="#1e293b" stroke-width="2.2"/><line x1="5" y1="12" x2="23" y2="12" stroke="#1e293b" stroke-width="2.2"/><line x1="5" y1="18" x2="29" y2="18" stroke="#1e293b" stroke-width="2.2"/><line x1="5" y1="24" x2="20" y2="24" stroke="#1e293b" stroke-width="2.2"/></svg>`;
+    case 'align_center':
+      return `<svg viewBox="0 0 36 30" width="36" height="30"><line x1="5" y1="6" x2="31" y2="6" stroke="#1e293b" stroke-width="2.2"/><line x1="9" y1="12" x2="27" y2="12" stroke="#1e293b" stroke-width="2.2"/><line x1="6" y1="18" x2="30" y2="18" stroke="#1e293b" stroke-width="2.2"/><line x1="11" y1="24" x2="25" y2="24" stroke="#1e293b" stroke-width="2.2"/></svg>`;
+    case 'align_right':
+      return `<svg viewBox="0 0 36 30" width="36" height="30"><line x1="5" y1="6" x2="31" y2="6" stroke="#1e293b" stroke-width="2.2"/><line x1="13" y1="12" x2="31" y2="12" stroke="#1e293b" stroke-width="2.2"/><line x1="7" y1="18" x2="31" y2="18" stroke="#1e293b" stroke-width="2.2"/><line x1="16" y1="24" x2="31" y2="24" stroke="#1e293b" stroke-width="2.2"/></svg>`;
+    case 'align_justify':
+      return `<svg viewBox="0 0 36 30" width="36" height="30"><line x1="5" y1="6" x2="31" y2="6" stroke="#1e293b" stroke-width="2.2"/><line x1="5" y1="12" x2="31" y2="12" stroke="#1e293b" stroke-width="2.2"/><line x1="5" y1="18" x2="31" y2="18" stroke="#1e293b" stroke-width="2.2"/><line x1="5" y1="24" x2="31" y2="24" stroke="#1e293b" stroke-width="2.2"/></svg>`;
+    case 'indent_dec':
+      return `<svg viewBox="0 0 40 30" width="40" height="30"><line x1="6" y1="6" x2="34" y2="6" stroke="#334155" stroke-width="2"/><line x1="18" y1="12" x2="34" y2="12" stroke="#334155" stroke-width="2"/><line x1="18" y1="18" x2="34" y2="18" stroke="#334155" stroke-width="2"/><line x1="6" y1="24" x2="34" y2="24" stroke="#334155" stroke-width="2"/><polygon points="14,11 14,19 6,15" fill="#0284c7"/></svg>`;
+    case 'indent_inc':
+      return `<svg viewBox="0 0 40 30" width="40" height="30"><line x1="6" y1="6" x2="34" y2="6" stroke="#334155" stroke-width="2"/><line x1="18" y1="12" x2="34" y2="12" stroke="#334155" stroke-width="2"/><line x1="18" y1="18" x2="34" y2="18" stroke="#334155" stroke-width="2"/><line x1="6" y1="24" x2="34" y2="24" stroke="#334155" stroke-width="2"/><polygon points="6,11 6,19 14,15" fill="#0284c7"/></svg>`;
+    case 'list_bullet':
+      return `<svg viewBox="0 0 46 30" width="46" height="30"><circle cx="8" cy="7" r="2.3" fill="#0284c7"/><line x1="14" y1="7" x2="32" y2="7" stroke="#334155" stroke-width="2"/><circle cx="8" cy="15" r="2.3" fill="#0284c7"/><line x1="14" y1="15" x2="32" y2="15" stroke="#334155" stroke-width="2"/><circle cx="8" cy="23" r="2.3" fill="#0284c7"/><line x1="14" y1="23" x2="32" y2="23" stroke="#334155" stroke-width="2"/>${dd(37,13)}</svg>`;
+    case 'list_num':
+      return `<svg viewBox="0 0 46 30" width="46" height="30"><text x="4" y="10" font-size="8" font-weight="bold" fill="#0284c7">1</text><line x1="13" y1="7" x2="32" y2="7" stroke="#334155" stroke-width="2"/><text x="4" y="18" font-size="8" font-weight="bold" fill="#0284c7">2</text><line x1="13" y1="15" x2="32" y2="15" stroke="#334155" stroke-width="2"/><text x="4" y="26" font-size="8" font-weight="bold" fill="#0284c7">3</text><line x1="13" y1="23" x2="32" y2="23" stroke="#334155" stroke-width="2"/>${dd(37,13)}</svg>`;
+    case 'list_multi':
+      return `<svg viewBox="0 0 48 30" width="48" height="30"><text x="3" y="10" font-size="7.5" font-weight="bold" fill="#0284c7">1</text><line x1="11" y1="7" x2="33" y2="7" stroke="#334155" stroke-width="2"/><text x="8" y="18" font-size="7.5" font-weight="bold" fill="#0284c7">a</text><line x1="16" y1="15" x2="33" y2="15" stroke="#334155" stroke-width="2"/><text x="14" y="26" font-size="7.5" font-weight="bold" fill="#0284c7">i</text><line x1="21" y1="23" x2="33" y2="23" stroke="#334155" stroke-width="2"/>${dd(38,13)}</svg>`;
+    case 'line_spacing':
+      return `<svg viewBox="0 0 48 30" width="48" height="30"><line x1="8" y1="7" x2="8" y2="23" stroke="#0284c7" stroke-width="1.8"/><polygon points="5,9 11,9 8,4" fill="#0284c7"/><polygon points="5,21 11,21 8,26" fill="#0284c7"/><line x1="16" y1="7" x2="34" y2="7" stroke="#334155" stroke-width="2"/><line x1="16" y1="15" x2="34" y2="15" stroke="#334155" stroke-width="2"/><line x1="16" y1="23" x2="34" y2="23" stroke="#334155" stroke-width="2"/>${dd(38,13)}</svg>`;
+    case 'align_quad':
+      return `<div style="display:flex;gap:4px;align-items:center">${renderIconSVG('align_left')}${renderIconSVG('align_center')}${renderIconSVG('align_right')}${renderIconSVG('align_justify')}</div>`;
+    case 'list_pair':
+      return `<div style="display:flex;gap:6px;align-items:center">${renderIconSVG('list_bullet')}<span style="color:#0f172a;font-weight:900">,</span>${renderIconSVG('list_num')}</div>`;
+    case 'indent_pair':
+      return `<div style="display:flex;gap:6px;align-items:center">${renderIconSVG('indent_dec')}${renderIconSVG('indent_inc')}</div>`;
+    case 'zoom_100':
+      return `<svg viewBox="0 0 60 36" width="60" height="36"><rect x="18" y="3" width="16" height="18" fill="#fff" stroke="#334155" stroke-width="1.5"/><circle cx="34" cy="14" r="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.6"/><text x="30" y="32" text-anchor="middle" font-size="10" font-weight="bold" fill="#0f172a">100%</text></svg>`;
+    case 'close_preview':
+      return `<svg viewBox="0 0 110 38" width="110" height="38"><line x1="48" y1="6" x2="60" y2="18" stroke="#dc2626" stroke-width="3"/><line x1="60" y1="6" x2="48" y2="18" stroke="#dc2626" stroke-width="3"/><text x="55" y="31" text-anchor="middle" font-size="9" font-weight="bold" fill="#0f172a">Закрыть окно просмотра</text></svg>`;
+    case 'close_red_x':
+      return `<svg viewBox="0 0 54 30" width="54" height="30"><rect x="3" y="3" width="48" height="24" rx="4" fill="#ef4444" stroke="#991b1b" stroke-width="1.5"/><line x1="21" y1="9" x2="33" y2="21" stroke="#fff" stroke-width="3"/><line x1="33" y1="9" x2="21" y2="21" stroke="#fff" stroke-width="3"/></svg>`;
+    case 'page_setup':
+      return `<svg viewBox="0 0 86 38" width="86" height="38"><rect x="33" y="3" width="18" height="20" fill="#fff" stroke="#0284c7" stroke-width="1.6"/><text x="43" y="33" text-anchor="middle" font-size="9" font-weight="bold" fill="#0f172a">Параметры стр.</text></svg>`;
+    case 'pen_style':
+      return `<svg viewBox="0 0 120 26" width="120" height="26"><rect x="1" y="2" width="118" height="22" rx="3" fill="#fff" stroke="#64748b" stroke-width="1.4"/><line x1="10" y1="13" x2="96" y2="13" stroke="#0f172a" stroke-width="2"/>${dd(106,11)}</svg>`;
+    case 'pen_weight':
+      return `<svg viewBox="0 0 74 26" width="74" height="26"><rect x="1" y="2" width="72" height="22" rx="3" fill="#fff" stroke="#64748b" stroke-width="1.4"/><text x="8" y="17" font-size="12" font-weight="bold" fill="#0f172a">0,5 пт</text>${dd(58,11)}</svg>`;
+    case 'borders':
+      return `<svg viewBox="0 0 98 26" width="98" height="26"><rect x="1" y="2" width="96" height="22" rx="3" fill="#fff" stroke="#64748b" stroke-width="1.4"/><rect x="7" y="6" width="14" height="14" fill="none" stroke="#334155" stroke-width="1.4"/><line x1="14" y1="6" x2="14" y2="20" stroke="#334155" stroke-width="1.2"/><line x1="7" y1="13" x2="21" y2="13" stroke="#334155" stroke-width="1.2"/><text x="26" y="17" font-size="11.5" font-weight="bold" fill="#0f172a">Границы</text>${dd(84,11)}</svg>`;
+    case 'shading_lbl':
+      return `<svg viewBox="0 0 98 26" width="98" height="26"><rect x="1" y="2" width="96" height="22" rx="3" fill="#fff" stroke="#64748b" stroke-width="1.4"/><path d="M9 14 L15 8 L20 13 L14 19 Z" fill="#cbd5e1" stroke="#334155" stroke-width="1.3"/><rect x="7" y="19" width="14" height="3" fill="#3b82f6"/><text x="26" y="17" font-size="11.5" font-weight="bold" fill="#0f172a">Заливка</text>${dd(84,11)}</svg>`;
+    default:
+      return esc(key);
+  }
+}
+
+// ============================================================================
+// APP STATE & STORAGE
+// ============================================================================
+const LS = 'inf26_doc_quiz_';
+let mode = 'game';
+let soundOn = true;
+let sessionList = [];
+let sessionTitle = '';
+let sessionIsExam = false;
+let curIdx = 0;
+let answers = {};
+let flags = {};
+let score = 0;
+let streak = 0;
+let timerInt = null;
+let timeLeft = 40;
+let lastStartFn = null;
+
+function lsGet(k, d) { try { const v = localStorage.getItem(LS + k); return v ? JSON.parse(v) : d; } catch { return d; } }
+function lsSet(k, v) { try { localStorage.setItem(LS + k, JSON.stringify(v)); } catch {} }
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function playTone(ok) {
+  if (!soundOn) return;
+  try {
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    const ctx = new Ctx();
+    const osc = ctx.createOscillator(), g = ctx.createGain();
+    osc.connect(g); g.connect(ctx.destination);
+    if (ok) {
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(523.25, ctx.currentTime);
+      osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.08);
+      g.gain.setValueAtTime(0.18, ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.008, ctx.currentTime + 0.28);
+      osc.start(); osc.stop(ctx.currentTime + 0.28);
+    } else {
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(210, ctx.currentTime);
+      osc.frequency.setValueAtTime(140, ctx.currentTime + 0.1);
+      g.gain.setValueAtTime(0.15, ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.008, ctx.currentTime + 0.3);
+      osc.start(); osc.stop(ctx.currentTime + 0.3);
+    }
+  } catch {}
+}
+
+function toggleSound() {
+  soundOn = !soundOn;
+  document.getElementById('soundBtn').textContent = soundOn ? '🔊 Дыбыс: Қосулы' : '🔇 Дыбыс: Өшірулі';
+}
+function setMode(m) {
+  mode = m;
+  document.getElementById('modeGameBtn').classList.toggle('active', m === 'game');
+  document.getElementById('modeStudyBtn').classList.toggle('active', m === 'study');
+}
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  ['modules', 'blocks', 'exam', 'bank'].forEach(t => {
+    document.getElementById('tab-' + t).style.display = (t === id) ? 'block' : 'none';
+  });
+  if (id === 'bank') renderBank();
+}
+
+function renderDashboard() {
+  const mastered = lsGet('mastered', []);
+  const errs = lsGet('errors', []);
+  const bestExam = lsGet('bestExam', 0);
+  document.getElementById('masteredStat').textContent = mastered.length;
+  document.getElementById('errorStat').textContent = errs.length;
+  document.getElementById('bestExamStat').textContent = bestExam + '/40';
+  document.getElementById('errQuickNum').textContent = errs.length;
+  document.getElementById('errQuickBtn').style.display = errs.length > 0 ? 'inline-flex' : 'none';
+
+  document.getElementById('modulesGrid').innerHTML = MODULES.map(m => {
+    const cnt = DB.filter(q => q.mod === m.id).length;
+    return `<div class="block-card">
+      <div class="b-top"><span class="b-badge">${m.badge}</span><span class="b-count">${cnt} сұрақ</span></div>
+      <div class="b-title">${m.icon} ${esc(m.title)}</div>
+      <div class="b-desc">${esc(m.desc)}</div>
+      <div class="b-actions">
+        <button class="btn btn-primary" onclick="startModule('${m.id}', false)">▶ Бастау</button>
+        <button class="btn btn-outline" onclick="startModule('${m.id}', true)">🔀 Аралас</button>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('blocksGrid').innerHTML = BLOCKS_30.map(b => {
+    const cnt = b.end - b.start;
+    return `<div class="block-card">
+      <div class="b-top"><span class="b-badge">${b.badge}</span><span class="b-count">${cnt} сұрақ</span></div>
+      <div class="b-title">${esc(b.title)}</div>
+      <div class="b-desc">${esc(b.desc)}</div>
+      <div class="b-actions">
+        <button class="btn btn-primary" onclick="startBlock(${b.id}, false)">▶ Бастау</button>
+        <button class="btn btn-outline" onclick="startBlock(${b.id}, true)">🔀 Аралас</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function shuffleArr(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function startModule(modId, shuffled) {
+  const m = MODULES.find(x => x.id === modId);
+  lastStartFn = () => startModule(modId, shuffled);
+  let list = DB.filter(q => q.mod === modId);
+  if (shuffled) list = shuffleArr(list);
+  beginSession(list, m.title, false);
+}
+
+function startBlock(blockId, shuffled) {
+  const b = BLOCKS_30.find(x => x.id === blockId);
+  lastStartFn = () => startBlock(blockId, shuffled);
+  let list = DB.slice(b.start, b.end);
+  if (shuffled) list = shuffleArr(list);
+  beginSession(list, b.title, false);
+}
+
+function startIcons(shuffled) {
+  lastStartFn = () => startIcons(shuffled);
+  let list = DB.filter(q => q.optType === 'icon');
+  if (shuffled) list = shuffleArr(list);
+  beginSession(list, '🖱️ MS Word SVG батырмалары (17 сұрақ)', false);
+}
+
+function startMarathon(shuffled) {
+  lastStartFn = () => startMarathon(shuffled);
+  beginSession(shuffled ? shuffleArr(DB) : [...DB], '⚡ Барлық 145 сұрақ Марафон', false);
+}
+
+function startExam() {
+  lastStartFn = () => startExam();
+  beginSession(shuffleArr(DB).slice(0, 40), '🎓 Емтихан Симуляторы (40 сұрақ)', true);
+}
+
+function startErrors() {
+  const errs = lsGet('errors', []);
+  if (!errs.length) return;
+  lastStartFn = () => startErrors();
+  beginSession(DB.filter(q => errs.includes(q.id)), '🔄 Қателермен жұмыс', false);
+}
+
+function retrySessionWrong() {
+  const w = sessionList.filter(q => answers[q.id] !== q.ans);
+  if (!w.length) return;
+  lastStartFn = () => retrySessionWrong();
+  beginSession(w, '🔄 Қате кеткен сұрақтар', false);
+}
+
+function restartCurrent() { if (lastStartFn) lastStartFn(); }
+
+function beginSession(list, title, isExam) {
+  sessionList = list;
+  sessionTitle = title;
+  sessionIsExam = isExam;
+  curIdx = 0;
+  answers = {};
+  flags = {};
+  score = 0;
+  streak = 0;
+
+  document.getElementById('dashboardView').style.display = 'none';
+  document.getElementById('resultView').style.display = 'none';
+  document.getElementById('quizView').style.display = 'block';
+  document.getElementById('navPanel').style.display = (mode === 'study' || isExam) ? 'block' : 'none';
+  document.getElementById('streakPill').style.display = (mode === 'game' && !isExam) ? 'inline-block' : 'none';
+
+  clearInterval(timerInt);
+  if (isExam) {
+    timeLeft = 60 * 60;
+    updateExamTimer();
+    timerInt = setInterval(() => {
+      timeLeft--;
+      updateExamTimer();
+      if (timeLeft <= 0) { clearInterval(timerInt); showResults(); }
+    }, 1000);
+  }
+  renderQ();
+}
+
+function updateExamTimer() {
+  const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+  const el = document.getElementById('timerPill');
+  el.textContent = `⏱ ${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  el.classList.toggle('danger', timeLeft <= 180);
+}
+
+function updateGameTimer() {
+  const el = document.getElementById('timerPill');
+  el.textContent = `⏱ ${timeLeft}с`;
+  el.classList.toggle('danger', timeLeft <= 10);
+}
+
+function renderQ() {
+  if (!sessionIsExam) clearInterval(timerInt);
+  const q = sessionList[curIdx];
+  if (!q) return showResults();
+
+  document.getElementById('quizHeaderTitle').textContent = `${sessionTitle} · ${curIdx + 1} / ${sessionList.length}`;
+  document.getElementById('progressFill').style.width = `${((curIdx + 1) / sessionList.length) * 100}%`;
+  document.getElementById('streakPill').textContent = `🔥 ${streak}`;
+  document.getElementById('qTag').textContent = `№${q.id} · ${q.sec}`;
+  document.getElementById('qText').textContent = q.q;
+
+  const vSlot = document.getElementById('qVisualSlot');
+  if (q.visual) {
+    vSlot.innerHTML = `<div class="visual-box"><span style="color:#0f172a;font-size:0.82rem;font-weight:800">Үлгі батырма:</span> ${renderIconSVG(q.visual)}</div>`;
+  } else {
+    vSlot.innerHTML = '';
+  }
+
+  const fBtn = document.getElementById('flagBtn');
+  fBtn.style.borderColor = flags[q.id] ? 'var(--warning)' : 'var(--border)';
+  fBtn.style.color = flags[q.id] ? 'var(--warning)' : 'var(--text)';
+
+  const grid = document.getElementById('optsGrid');
+  const isIcon = q.optType === 'icon';
+  grid.className = isIcon ? 'opts-grid icon-opts' : 'opts-grid';
+  grid.innerHTML = '';
+
+  const answered = answers[q.id] !== undefined;
+  const letters = ['A', 'B', 'C', 'D'];
+
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = isIcon ? 'opt-btn icon-opt' : 'opt-btn';
+    if (isIcon) {
+      btn.innerHTML = `<span class="opt-letter">${letters[i]}</span><div class="ribbon-btn-wrap">${renderIconSVG(opt)}</div>`;
+    } else {
+      btn.innerHTML = `<span class="opt-letter">${letters[i]}</span><span>${esc(opt)}</span>`;
+    }
+    if (answered) {
+      btn.disabled = true;
+      if (i === q.ans) btn.classList.add('correct');
+      if (answers[q.id] === i && i !== q.ans) btn.classList.add('wrong');
+    } else {
+      btn.onclick = () => chooseOpt(i);
+    }
+    grid.appendChild(btn);
+  });
+
+  const fb = document.getElementById('feedbackBar');
+  if (answered) {
+    const ok = answers[q.id] === q.ans;
+    fb.style.display = 'block';
+    fb.className = 'feedback-bar ' + (ok ? 'ok' : 'bad');
+    const head = ok
+      ? '✅ Дұрыс! Жарайсыз!'
+      : (answers[q.id] === -1 ? `⏰ Уақыт бітті! Дұрыс жауап: ${letters[q.ans]}` : `❌ Қате! Дұрыс жауап: ${letters[q.ans]}`);
+    fb.innerHTML = `<div>${head}</div>` + (q.exp ? `<div class="feedback-exp">💡 ${esc(q.exp)}</div>` : '');
+  } else {
+    fb.style.display = 'none';
+  }
+
+  document.getElementById('prevBtn').style.visibility = curIdx > 0 ? 'visible' : 'hidden';
+  document.getElementById('nextBtn').textContent = (curIdx === sessionList.length - 1) ? 'Нәтижені көру ✓' : 'Келесі →';
+  document.getElementById('liveScoreTxt').textContent = `Дұрыс: ${score} / ${Object.keys(answers).length}`;
+
+  if (document.getElementById('navPanel').style.display === 'block') renderNavDots();
+
+  if (!sessionIsExam) {
+    if (mode === 'game' && !answered) {
+      timeLeft = 40;
+      updateGameTimer();
+      timerInt = setInterval(() => {
+        timeLeft--;
+        updateGameTimer();
+        if (timeLeft <= 0) { clearInterval(timerInt); chooseOpt(-1); }
+      }, 1000);
+    } else if (mode === 'study') {
+      const el = document.getElementById('timerPill');
+      el.textContent = '📚 Жаттау';
+      el.classList.remove('danger');
+    }
+  }
+}
+
+function chooseOpt(idx) {
+  if (!sessionIsExam) clearInterval(timerInt);
+  const q = sessionList[curIdx];
+  if (answers[q.id] !== undefined) return;
+  answers[q.id] = idx;
+
+  const ok = idx === q.ans;
+  if (ok) {
+    score++;
+    streak++;
+    playTone(true);
+    const m = lsGet('mastered', []);
+    if (!m.includes(q.id)) { m.push(q.id); lsSet('mastered', m); }
+    lsSet('errors', lsGet('errors', []).filter(x => x !== q.id));
+  } else {
+    streak = 0;
+    playTone(false);
+    const e = lsGet('errors', []);
+    if (!e.includes(q.id)) { e.push(q.id); lsSet('errors', e); }
+  }
+  renderQ();
+
+  if (mode === 'game' && !sessionIsExam && ok) {
+    setTimeout(() => {
+      if (sessionList[curIdx]?.id === q.id) nextQ();
+    }, 800);
+  }
+}
+
+function nextQ() {
+  if (curIdx < sessionList.length - 1) { curIdx++; renderQ(); }
+  else showResults();
+}
+function prevQ() { if (curIdx > 0) { curIdx--; renderQ(); } }
+function jumpQ(i) { curIdx = i; renderQ(); }
+function toggleFlag() { const q = sessionList[curIdx]; flags[q.id] = !flags[q.id]; renderQ(); }
+
+function renderNavDots() {
+  document.getElementById('navDots').innerHTML = sessionList.map((q, i) => {
+    let cls = 'nav-dot';
+    if (i === curIdx) cls += ' cur';
+    if (answers[q.id] !== undefined) cls += (answers[q.id] === q.ans ? ' ok' : ' bad');
+    if (flags[q.id]) cls += ' flg';
+    return `<div class="${cls}" onclick="jumpQ(${i})">${i + 1}</div>`;
+  }).join('');
+}
+
+function finishOrQuit() {
+  const done = Object.keys(answers).length;
+  if (done > 0 && confirm(`Қазір аяқтап нәтижені көресіз бе? (${done}/${sessionList.length})`)) showResults();
+  else if (done === 0) showDashboard();
+}
+
+function showResults() {
+  clearInterval(timerInt);
+  document.getElementById('quizView').style.display = 'none';
+  document.getElementById('resultView').style.display = 'block';
+
+  const total = sessionList.length;
+  const pct = Math.round((score / total) * 100);
+  document.getElementById('resScore').textContent = `${score} / ${total} (${pct}%)`;
+
+  if (sessionIsExam) {
+    const prev = lsGet('bestExam', 0);
+    if (score > prev) lsSet('bestExam', score);
+  }
+  const wrongCount = sessionList.filter(q => answers[q.id] !== q.ans).length;
+  document.getElementById('resRetryWrong').style.display = wrongCount > 0 ? 'inline-flex' : 'none';
+
+  if (pct >= 80) {
+    document.getElementById('resEmoji').textContent = '🏆';
+    document.getElementById('resTitle').textContent = 'КЕРЕМЕТ! 80%+ МЕЖЕСІ БАҒЫНДЫРЫЛДЫ!';
+    document.getElementById('resDesc').textContent = `${score}/${total} (${pct}%) — дайындығыңыз тамаша!`;
+    launchConfetti();
+  } else if (pct >= 60) {
+    document.getElementById('resEmoji').textContent = '👍';
+    document.getElementById('resTitle').textContent = 'ЖАҚСЫ НӘТИЖЕ!';
+    document.getElementById('resDesc').textContent = `${score}/${total} дұрыс. Қате кеткен ${wrongCount} сұрақты қайталап шығыңыз!`;
+  } else {
+    document.getElementById('resEmoji').textContent = '📖';
+    document.getElementById('resTitle').textContent = 'ҚАЙТАЛАП ШЫҒУ КЕРЕК';
+    document.getElementById('resDesc').textContent = `Жаттау режимі мен Шпаргалкадағы жауаптарды қарап шығыңыз.`;
+  }
+}
+
+function showDashboard() {
+  clearInterval(timerInt);
+  document.getElementById('quizView').style.display = 'none';
+  document.getElementById('resultView').style.display = 'none';
+  document.getElementById('dashboardView').style.display = 'block';
+  renderDashboard();
+}
+
+function renderBank() {
+  const query = (document.getElementById('bankSearch').value || '').trim().toLowerCase();
+  const flt = document.getElementById('bankFilter').value;
+  let list = DB;
+  if (flt === 'icons') list = DB.filter(q => q.optType === 'icon');
+  else if (flt !== 'all') list = DB.filter(q => q.mod === flt);
+
+  if (query) {
+    list = list.filter(q => (q.id + ' ' + q.sec + ' ' + q.q + ' ' + q.opts.join(' ') + ' ' + q.exp).toLowerCase().includes(query));
+  }
+  document.getElementById('bankCountLabel').textContent = `Көрсетілгені: ${list.length} / ${DB.length} сұрақ`;
+  const letters = ['A', 'B', 'C', 'D'];
+  document.getElementById('bankList').innerHTML = list.map(q => {
+    const isIcon = q.optType === 'icon';
+    const ansMarkup = isIcon
+      ? `<div class="bank-ans">✓ ${letters[q.ans]}) <span class="ribbon-btn-wrap" style="padding:3px 6px">${renderIconSVG(q.opts[q.ans])}</span> ${esc(ICON_LABELS[q.opts[q.ans]] || '')}</div>`
+      : `<div class="bank-ans">✓ ${letters[q.ans]}) ${esc(q.opts[q.ans])}</div>`;
+    return `<div class="bank-item">
+      <div style="font-size:0.74rem;color:var(--primary);font-weight:800;margin-bottom:5px">№${q.id} · ${esc(q.sec)}</div>
+      <div style="font-weight:700;line-height:1.45;color:#fff;white-space:pre-line">${esc(q.q)}</div>
+      ${ansMarkup}
+      <div class="bank-exp">💡 ${esc(q.exp)}</div>
+    </div>`;
+  }).join('');
+}
+
+function launchConfetti() {
+  const canvas = document.getElementById('confettiCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const colors = ['#38bdf8', '#a855f7', '#10b981', '#facc15', '#f43f5e'];
+  const pieces = Array.from({length: 110}, () => ({
+    x: Math.random() * canvas.width, y: -20 - Math.random() * 200,
+    w: 7 + Math.random() * 6, h: 5 + Math.random() * 6,
+    vx: (Math.random() - 0.5) * 4, vy: 3 + Math.random() * 4,
+    rot: Math.random() * Math.PI * 2, vrot: (Math.random() - 0.5) * 0.2,
+    c: colors[Math.floor(Math.random() * colors.length)]
+  }));
+  let frames = 0;
+  function step() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    pieces.forEach(p => {
+      p.x += p.vx; p.y += p.vy; p.rot += p.vrot;
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      ctx.fillStyle = p.c; ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+      ctx.restore();
+    });
+    if (++frames < 150) requestAnimationFrame(step);
+    else ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+  requestAnimationFrame(step);
+}
+
+window.addEventListener('keydown', (e) => {
+  if (document.getElementById('quizView').style.display !== 'block') return;
+  const k = e.key.toUpperCase();
+  if (k === '1' || k === 'A') chooseOpt(0);
+  else if (k === '2' || k === 'B') chooseOpt(1);
+  else if (k === '3' || k === 'C') chooseOpt(2);
+  else if (k === '4' || k === 'D') chooseOpt(3);
+  else if (k === 'ENTER' || k === ' ') {
+    const q = sessionList[curIdx];
+    if (q && answers[q.id] !== undefined) { e.preventDefault(); nextQ(); }
+  }
+  else if (e.key === 'ArrowRight') nextQ();
+  else if (e.key === 'ArrowLeft') prevQ();
+});
+
+renderDashboard();
+</script>
+</body>
+</html>
